@@ -1,0 +1,18 @@
+.posts-view {
+    padding: 0;
+    margin: 0;
+}
+
+.posts-list {
+    margin: inherit;
+    padding: inherit;
+    list-style: none;
+}
+
+.posts-item {
+    background-color: #fbfbfb;
+    padding: 0.5em;
+    margin: 0.5em;
+    border: 1px #f0f0f0 solid;
+    border-radius: 3px;
+}
