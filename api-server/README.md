@@ -2,7 +2,7 @@
 
 To install and start the API server, run the following commands in this directory:
 
-* `npm install`
+* `yarn` or `npm install`
 * `node server`
 
 ## Using The Server
