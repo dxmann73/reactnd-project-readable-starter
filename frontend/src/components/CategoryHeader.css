@@ -1,8 +1,8 @@
-.categories-header {
+.category-header {
     background-color: darkgrey;
 }
 
-.categories-teaser {
+.category-teaser {
     padding-left: 20px;
     padding-right: 20px;
     color: midnightblue;
@@ -10,7 +10,14 @@
     font-weight: bold;
 }
 
-.categories-link {
+.category-link {
+    padding: 10px;
+    color: darkslateblue;
+    display: inline-block;
+    font-weight: normal;
+}
+
+.category-link-active {
     padding: 10px;
     color: darkslateblue;
     display: inline-block;

@@ -1,9 +1,13 @@
-.posts-view {
+.category-details {
     padding: 0;
     margin: 0;
 }
 
-.posts-list {
+.category-heading {
+    padding: 0.5em;
+}
+
+.category-posts {
     margin: inherit;
     padding: inherit;
     list-style: none;

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import logo from '../logo.svg';
 import './App.css';
-import Categories from './Categories';
-import Posts from './Posts';
+import Category from './Category';
+import {Route} from 'react-router-dom';
 
 class App extends Component {
     render() {
@@ -15,8 +15,10 @@ class App extends Component {
                     <div className="app-header-container">Welcome to Reddix</div>
                 </header>
                 <div className="app-main">
-                    <Categories />
-                    <Posts />
+                    <Route exact path="/" render={
+                        (props) => <Category categoryName={'all'} />} />
+                    <Route exact path="/category/:categoryName" render={
+                        (props) => <Category categoryName={props.match.params.categoryName} />} />
                 </div>
             </div>
         );
