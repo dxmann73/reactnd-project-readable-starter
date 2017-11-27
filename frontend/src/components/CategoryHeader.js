@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 class CategoryHeader extends React.Component {
     render() {
+        // console.log('CategoryHeader::render', this.props);
         let {categoryName, categories} = this.props;
         return <div className="category-header">
             <div className="category-teaser">Categories:&nbsp;</div>
@@ -29,12 +30,11 @@ CategoryHeader.propTypes = {
     categoryName: PropTypes.string.isRequired,
 };
 
-/** categories live in the store, but the current category names comes with the router props, to allow for bookmarking */
 const mapStateToProps = (state, props) => {
     // console.log('CategoryHeader::mapStateToProps', state, props);
     return {
         categories: state.categories.all,
-        categoryName: props.categoryName,
+        categoryName: state.categories.currentCategoryName
     };
 };
 

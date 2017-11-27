@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../logo.svg';
 import './App.css';
-import Category from './Category';
+import CategoryView from './CategoryView';
 import {Route} from 'react-router';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -18,10 +18,12 @@ class App extends React.Component {
                     <div className="app-header-container">Welcome to Reddix</div>
                 </header>
                 <div className="app-main">
-                    <Route exact path="/" render={
-                        (props) => <Category categoryName={'all'} />} />
-                    <Route exact path="/category/:categoryName" render={
-                        (props) => <Category categoryName={props.match.params.categoryName} />} />
+                    <Route exact path="/"
+                           render={() => <CategoryView forCategory={'all'} />}
+                    />
+                    <Route exact path="/category/:categoryName"
+                           render={(props) => <CategoryView forCategory={props.match.params.categoryName} />}
+                    />
                 </div>
             </div>
         );
@@ -39,7 +41,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        initCategories: () => dispatch(fetchCategories())
+        initCategories: () => dispatch(fetchCategories()),
     };
 };
 

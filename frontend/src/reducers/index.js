@@ -1,11 +1,17 @@
-import {UPDATE_CATEGORIES} from '../actions/index';
+import {CHANGE_TO_CATEGORY, UPDATE_CATEGORIES} from '../actions/index';
 
-const categoryReducer = (state = {initial: true}, action) => {
+const categoryReducer = (state = {}, action) => {
     switch (action.type) {
-        case UPDATE_CATEGORIES:
-            // when categories have been fetched, disregard all previous state; this will later include posts
+        case UPDATE_CATEGORIES:// when categories have been fetched
             return {
-                all: action.data.categories
+                ...state,
+                all: action.data.categories,
+            };
+        case CHANGE_TO_CATEGORY:// when the current category has been changed or is being initialized
+            // TODO disregard all previous posts
+            return {
+                ...state,
+                currentCategoryName: action.categoryName,
             };
         default:
             return state;
