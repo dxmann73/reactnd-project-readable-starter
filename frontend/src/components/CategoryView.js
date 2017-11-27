@@ -16,13 +16,13 @@ class CategoryView extends React.Component {
 
     /** this is called when we mount the first time, e.g. when coming from F5 or a bookmark */
     componentWillMount() {
-        console.log('CategoryView::componentWillMount', this.props);
+        // console.log('CategoryView::componentWillMount', this.props);
         this.props.initCategory(this.props.forCategory);
     }
 
     /** this is called when the route changes */
     componentWillReceiveProps(props) {
-        console.log('CategoryView::componentWillReceiveProps', props);
+        // console.log('CategoryView::componentWillReceiveProps', props);
         this.props.initCategory(props.forCategory);
     }
 }
