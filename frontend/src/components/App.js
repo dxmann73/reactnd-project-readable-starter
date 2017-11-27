@@ -1,10 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 import logo from '../logo.svg';
 import './App.css';
 import Category from './Category';
-import {Route} from 'react-router-dom';
+import {Route} from 'react-router';
+import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {fetchCategories} from '../actions/index';
 
-class App extends Component {
+class App extends React.Component {
     render() {
         return (
             <div className="app">
@@ -23,6 +26,25 @@ class App extends Component {
             </div>
         );
     }
+
+    componentDidMount() {
+        this.props.initCategories();
+    }
 }
 
-export default App;
+const mapStateToProps = (state, props) => {
+    // console.log('App::mapStateToProps ', state, props);
+    return {};// no mapping needed for now
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        initCategories: () => dispatch(fetchCategories())
+    };
+};
+
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(App));

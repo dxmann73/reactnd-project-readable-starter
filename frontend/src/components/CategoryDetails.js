@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './CategoryDetails.css';
 
-export default class CategoryDetails extends Component {
+class CategoryDetails extends React.Component {
     render() {
         let {categoryName} = this.props;
         return <div className="category-details">
@@ -13,3 +13,5 @@ export default class CategoryDetails extends Component {
         </div>;
     }
 }
+
+export default CategoryDetails;

@@ -5,6 +5,8 @@ To install and start the API server, run the following commands in this director
 * `yarn` or `npm install`
 * `node server`
 
+The server will be accessible under http://localhost:3001
+
 ## Using The Server
 
 ### Include An Authorization Header

@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import CategoryHeader from './CategoryHeader';
 import CategoryDetails from './CategoryDetails';
+import {connect} from 'react-redux';
 
-export default class Category extends Component {
+class Category extends React.Component {
     render() {
         let {categoryName} = this.props;
         return <div className="category-main">
@@ -11,3 +12,12 @@ export default class Category extends Component {
         </div>;
     }
 }
+
+const mapStateToProps = (state, props) => {
+    // console.log('Category::mapStateToProps ', state, props);
+    return {};// no mapping needed for now
+};
+
+export default connect(
+    mapStateToProps
+)(Category);
