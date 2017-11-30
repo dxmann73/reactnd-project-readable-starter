@@ -12,8 +12,8 @@ const headers = {
 
 
 /**
- * GET categories from server
- * @return an array of categories in the form of {name, path}
+ * GET categories from the server
+ * @return an array of categories in the form {name, path}
  */
 export const getCategories = () =>
     fetch(`${api}/categories`, {headers})

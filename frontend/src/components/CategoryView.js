@@ -2,7 +2,7 @@ import React from 'react';
 import CategoryHeader from './CategoryHeader';
 import CategoryDetails from './CategoryDetails';
 import {connect} from 'react-redux';
-import {changeToCategory} from '../actions/index';
+import {changeToCategory} from '../actions/category-actions';
 
 class CategoryView extends React.Component {
 
@@ -32,7 +32,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    initCategory: (categoryName) => dispatch(changeToCategory(categoryName)),
+    initCategory: (categoryName) => dispatch(changeToCategory(categoryName, dispatch)),
 });
 
 

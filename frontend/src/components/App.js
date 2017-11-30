@@ -5,7 +5,7 @@ import CategoryView from './CategoryView';
 import {Route} from 'react-router';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {fetchCategories} from '../actions/index';
+import {fetchCategories} from '../actions/category-actions';
 
 class App extends React.Component {
     render() {

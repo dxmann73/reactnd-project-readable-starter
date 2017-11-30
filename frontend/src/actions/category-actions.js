@@ -10,11 +10,14 @@ export const fetchCategories = () => (dispatch) => {
     );
 };
 
-/** change the current category */
-export const changeToCategory = (categoryName) => {
+/** change the current category. passes dispatch to reducer so that it can go fetch posts when
+ * the state is being updated
+ */
+export const changeToCategory = (categoryName, dispatch) => {
     return {
         type: CHANGE_TO_CATEGORY,
-        categoryName
+        categoryName,
+        dispatch
     };
 };
 
