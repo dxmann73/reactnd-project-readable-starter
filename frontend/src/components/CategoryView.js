@@ -3,6 +3,7 @@ import CategoryHeader from './CategoryHeader';
 import CategoryDetails from './CategoryDetails';
 import {connect} from 'react-redux';
 import {changeToCategory} from '../actions/category-actions';
+import PropTypes from 'prop-types';
 
 class CategoryView extends React.Component {
 
@@ -27,12 +28,21 @@ class CategoryView extends React.Component {
     }
 }
 
-const mapStateToProps = (state, props) => ({
-    forCategory: props.forCategory
-});
+CategoryView.propTypes = {
+    forCategory: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            path: PropTypes.string,// can be null for the default category
+        }
+    ),
+};
+
+const mapStateToProps = (state, props) => {
+    // console.log('CategoryHeader::render', this.props);
+    return {forCategory: props.forCategory};
+};
 
 const mapDispatchToProps = (dispatch) => ({
-    initCategory: (categoryName) => dispatch(changeToCategory(categoryName, dispatch)),
+    initCategory: (category) => dispatch(changeToCategory(category, dispatch)),
 });
 
 

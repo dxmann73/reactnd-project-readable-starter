@@ -6,6 +6,7 @@ import {Route} from 'react-router';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchCategories} from '../actions/category-actions';
+import {defaultCategory} from '../reducers/category-reducers';
 
 class App extends React.Component {
     render() {
@@ -18,12 +19,12 @@ class App extends React.Component {
                     <div className="app-header-container">Welcome to Reddix</div>
                 </header>
                 <div className="app-main">
-                    <Route exact path="/"
-                           render={() => <CategoryView forCategory={'all'} />}
-                    />
-                    <Route exact path="/category/:categoryName"
-                           render={(props) => <CategoryView forCategory={props.match.params.categoryName} />}
-                    />
+                    <Route exact path="/" render={() =>
+                        <CategoryView forCategory={defaultCategory} />
+                    } />
+                    <Route exact path="/:category" render={(props) =>
+                        <CategoryView forCategory={{name: props.match.params.category, path: props.match.params.category}} />
+                    } />
                 </div>
             </div>
         );

@@ -1,13 +1,14 @@
 import React from 'react';
 import './CategoryDetails.css';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 class CategoryDetails extends React.Component {
     render() {
         // console.log('CategoryDetails::render', this.props);
-        let {categoryName, posts} = this.props;
+        let {category, posts} = this.props;
         return <div className="category-details">
-            <h4 className="category-heading">Posts for category '{categoryName}':</h4>
+            <h4 className="category-heading">Posts for category '{category.name}':</h4>
             <ul className="category-posts">
                 {posts && posts.map(post =>
                     /**
@@ -21,17 +22,38 @@ class CategoryDetails extends React.Component {
                      * "deleted":false,
                      * "commentCount":2}
                      */
-                    <li className="posts-item" key="post.id">{JSON.stringify(post)}</li>
+                    <li className="posts-item" key={post.id}>{JSON.stringify(post)}</li>
                 )}
             </ul>
         </div>;
     }
 }
 
+CategoryDetails.propTypes = {
+    category: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            path: PropTypes.string,// can be null for the default category
+        }
+    ),
+    posts: PropTypes.arrayOf(
+        PropTypes.shape({
+                id: PropTypes.string.isRequired,
+                timestamp: PropTypes.number.isRequired,
+                title: PropTypes.string.isRequired,
+                body: PropTypes.string.isRequired,
+                author: PropTypes.string.isRequired,
+                category: PropTypes.string.isRequired,
+                voteScore: PropTypes.number.isRequired,
+                deleted: PropTypes.bool.isRequired,
+                commentCount: PropTypes.number.isRequired,
+            }
+        )),
+};
+
 const mapStateToProps = (state, props) => {
     // console.log('CategoryDetails::mapStateToProps', state, props);
     return {
-        categoryName: state.categories.currentCategoryName,
+        category: state.categories.currentCategory,
         posts: state.posts.all,
     };
 };

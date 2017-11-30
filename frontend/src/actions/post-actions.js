@@ -4,7 +4,7 @@ export const UPDATE_POSTS = 'UPDATE_POSTS';
 
 /** Return a function which takes dispatch as an argument and dispatches the action on promise resolve */
 export const fetchPosts = (category) => (dispatch) => {
-    getPosts(category).then(data =>
+    getPosts(category.path).then(data =>
         dispatch(updatePosts(data))
     );
 };

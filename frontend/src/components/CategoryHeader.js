@@ -7,13 +7,13 @@ import PropTypes from 'prop-types';
 class CategoryHeader extends React.Component {
     render() {
         // console.log('CategoryHeader::render', this.props);
-        let {categoryName, categories} = this.props;
+        let {currentCategory, categories} = this.props;
         return <div className="category-header">
             <div className="category-teaser">Categories:&nbsp;</div>
             {categories && categories.map(
                 cat =>
-                    <div className={categoryName === cat.name ? 'category-link-active' : 'category-link'} key={cat.path}>
-                        <Link to={'/category/' + cat.path}>{cat.name}</Link>
+                    <div className={currentCategory.path === cat.path ? 'category-link-active' : 'category-link'} key={cat.path}>
+                        <Link to={'/' + (cat.path || '')}>{cat.name}</Link>
                     </div>
             )}
         </div>;
@@ -24,17 +24,21 @@ CategoryHeader.propTypes = {
     categories: PropTypes.arrayOf(
         PropTypes.shape({
                 name: PropTypes.string.isRequired,
-                path: PropTypes.string.isRequired,
+                path: PropTypes.string,// can be null for the default category
             }
         )),
-    categoryName: PropTypes.string.isRequired,
+    currentCategory: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            path: PropTypes.string,// can be null for the default category
+        }
+    ),
 };
 
 const mapStateToProps = (state, props) => {
     // console.log('CategoryHeader::mapStateToProps', state, props);
     return {
         categories: state.categories.all,
-        categoryName: state.categories.currentCategoryName
+        currentCategory: state.categories.currentCategory
     };
 };
 
