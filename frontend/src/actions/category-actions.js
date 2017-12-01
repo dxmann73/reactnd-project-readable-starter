@@ -1,4 +1,5 @@
 import {getCategories} from '../api/CategoryAPI';
+import {fetchPosts} from './post-actions';
 
 export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES';
 export const CHANGE_TO_CATEGORY = 'CHANGE_TO_CATEGORY';
@@ -11,10 +12,11 @@ export const fetchCategories = () => (dispatch) => {
 };
 
 /**
- * Change the current category. passes dispatch to reducer so that it can go fetch posts when
- * the state is being updated
+ * Change the current category. Dispatches an action to fetch posts as wel
  */
 export const changeToCategory = (category, dispatch) => {
+    // disregard all previous posts, fetch the new ones
+    dispatch(fetchPosts(action.category));
     return {
         type: CHANGE_TO_CATEGORY,
         category,

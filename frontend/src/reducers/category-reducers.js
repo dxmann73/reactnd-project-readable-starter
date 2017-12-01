@@ -1,5 +1,4 @@
 import {CHANGE_TO_CATEGORY, UPDATE_CATEGORIES} from '../actions/category-actions';
-import {fetchPosts} from '../actions/post-actions';
 
 export const defaultCategory = {name: 'all', path: null};
 
@@ -13,8 +12,6 @@ const categoryReducers = (state = {}, action) => {
                 all: action.data.categories,
             };
         case CHANGE_TO_CATEGORY:// when the current category has been changed or is being initialized
-            // disregard all previous posts, fetch the new ones
-            action.dispatch(fetchPosts(action.category));
             return {
                 ...state,
                 currentCategory: action.category,
