@@ -1,24 +1,24 @@
 # Readable APP
 
-This is a simple reddit clone, based on the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. 
+This is a simple reddit clone, based on the starter project for the final assessment project for Udacity's Redux course. 
 Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. 
 Users will also be able to edit and delete posts and comments.
 
 This repository includes 
-* a simple backend API Server in the api-server subdir
-* the frontend which contains the actual app (which has been created using create-react-app)
+* a simple backend API Server in the `api-server` subdir
+* the frontend which contains the actual app (created using create-react-app) in the `frontend` subdir
 
 ## Start developing / using the App
 
-To get started developing right away:
+To get started:
 
 * Install and start the API server
     - `cd api-server`
-    - `yarn` or ``npm install`
+    - `yarn` or `npm install`
     - `node server`
 * In another terminal window, install and start the app
     - `cd frontend`
-    - `yarn` or ``npm install`
+    - `yarn` or `npm install`
     - `yarn start` or `npm start`
 
 ## API Server
