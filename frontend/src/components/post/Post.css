@@ -1,0 +1,29 @@
+.post-title {
+    font-weight: bold;
+    margin-bottom: 0.25em;
+}
+
+.post-title-link {
+    text-decoration: none;
+}
+
+.post-subtitle {
+    display: inline-block;
+    font-size: small;
+}
+
+.post-author {
+    color: midnightblue;
+    font-weight: bolder;
+}
+
+.post-permalink {
+    color: blue;
+    /*
+     font-weight: bold;
+     */
+}
+
+.post-body {
+    margin: 0.5em;
+}

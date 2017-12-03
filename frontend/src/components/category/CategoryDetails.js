@@ -13,18 +13,7 @@ class CategoryDetails extends React.Component {
             <h4 className="category-heading">Posts for category '{category.name}':</h4>
             <ul className="category-posts">
                 {posts && posts.map(post =>
-                    /**
-                     * {"id":"8xf0y6ziyjabvozdd253nd",
-                     * "timestamp":1467166872634,
-                     * "title":"Udacity is the best place to learn React",
-                     * "body":"Everyone says so after all.",
-                     * "author":"thingtwo",
-                     * "category":"react",
-                     * "voteScore":6,
-                     * "deleted":false,
-                     * "commentCount":2}
-                     */
-                    <li className="posts-item" key={post.id}><Post post={post} /></li>
+                    <li className="posts-item" key={post.id}><Post post={post} detailedMode={false} /></li>
                 )}
             </ul>
         </div>;
