@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import './CategoryHeader.css';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {CategoryType} from '../../types/Typedefs';
 
 class CategoryHeader extends React.Component {
     render() {
@@ -21,17 +22,8 @@ class CategoryHeader extends React.Component {
 }
 
 CategoryHeader.propTypes = {
-    categories: PropTypes.arrayOf(
-        PropTypes.shape({
-                name: PropTypes.string.isRequired,
-                path: PropTypes.string,// can be null for the default category
-            }
-        )),
-    currentCategory: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            path: PropTypes.string,// can be null for the default category
-        }
-    ),
+    categories: PropTypes.arrayOf(CategoryType),
+    currentCategory: CategoryType,
 };
 
 const mapStateToProps = (state, props) => {

@@ -2,6 +2,8 @@ import React from 'react';
 import './CategoryDetails.css';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {CategoryType, PostType} from '../../types/Typedefs';
+import Post from '../post/Post';
 
 class CategoryDetails extends React.Component {
     render() {
@@ -22,7 +24,7 @@ class CategoryDetails extends React.Component {
                      * "deleted":false,
                      * "commentCount":2}
                      */
-                    <li className="posts-item" key={post.id}>{JSON.stringify(post)}</li>
+                    <li className="posts-item" key={post.id}><Post post={post} /></li>
                 )}
             </ul>
         </div>;
@@ -30,24 +32,8 @@ class CategoryDetails extends React.Component {
 }
 
 CategoryDetails.propTypes = {
-    category: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            path: PropTypes.string,// can be null for the default category
-        }
-    ),
-    posts: PropTypes.arrayOf(
-        PropTypes.shape({
-                id: PropTypes.string.isRequired,
-                timestamp: PropTypes.number.isRequired,
-                title: PropTypes.string.isRequired,
-                body: PropTypes.string.isRequired,
-                author: PropTypes.string.isRequired,
-                category: PropTypes.string.isRequired,
-                voteScore: PropTypes.number.isRequired,
-                deleted: PropTypes.bool.isRequired,
-                commentCount: PropTypes.number.isRequired,
-            }
-        )),
+    category: CategoryType,
+    posts: PropTypes.arrayOf(PostType),
 };
 
 const mapStateToProps = (state, props) => {
