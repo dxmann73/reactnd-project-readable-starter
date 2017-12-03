@@ -16,7 +16,7 @@ export const fetchCategories = () => (dispatch) => {
  */
 export const changeToCategory = (category, dispatch) => {
     // disregard all previous posts, fetch the new ones
-    dispatch(fetchPosts(action.category));
+    dispatch(fetchPosts(category));
     return {
         type: CHANGE_TO_CATEGORY,
         category,
