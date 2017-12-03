@@ -14,12 +14,12 @@ To get started:
 
 * Install and start the API server
     - `cd api-server`
-    - `yarn` or `npm install`
+    - `npm install`
     - `node server`
 * In another terminal window, install and start the app
     - `cd frontend`
-    - `yarn` or `npm install`
-    - `yarn start` or `npm start`
+    - `npm install`
+    - `npm start`
 
 ## API Server
 
