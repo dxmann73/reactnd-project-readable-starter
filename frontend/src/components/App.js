@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../logo.svg';
 import './App.css';
-import CategoryView from './CategoryView';
+import CategoryView from './category/CategoryView';
 import {Route} from 'react-router';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';

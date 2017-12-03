@@ -2,7 +2,7 @@ import React from 'react';
 import CategoryHeader from './CategoryHeader';
 import CategoryDetails from './CategoryDetails';
 import {connect} from 'react-redux';
-import {changeToCategory} from '../actions/category-actions';
+import {changeToCategory} from '../../actions/category-actions';
 import PropTypes from 'prop-types';
 
 class CategoryView extends React.Component {
