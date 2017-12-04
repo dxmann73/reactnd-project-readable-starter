@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {PostType} from '../../types/Typedefs';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import {Link} from 'react-router-dom';
 import './Post.css';
 
@@ -10,7 +11,6 @@ class Post extends React.Component {
         const {post, detailedMode} = this.props;
         /**
          * Still to implement:
-         * "timestamp":1467166872634, TODO use moment from Learn Pure React pg. 51
          * "voteScore":6, TODO show score on post and interact directly, bypassing the post detail view
          * "deleted":false, TODO maybe filter deleted posts
          */
@@ -19,7 +19,7 @@ class Post extends React.Component {
                 <Link className="post-title-link" to={`/${post.category}/${post.id}`}>{post.title}</Link>
             </div>
             <div className="post-subtitle">
-                <span>posted {post.timestamp} by </span>
+                <span>posted {moment(post.timestamp).fromNow()} by </span>
                 <span className="post-author">{post.author}</span>
                 <span> in category </span>
                 <Link className="post-category-link" to={`/${post.category}`}>{post.category}</Link>
