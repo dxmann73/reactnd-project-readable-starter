@@ -12,7 +12,6 @@ class Post extends React.Component {
         /**
          * Still to implement:
          * "voteScore":6, TODO show score on post and interact directly, bypassing the post detail view
-         * "deleted":false, TODO maybe filter deleted posts
          */
         return <div>
             <div className="post-title">

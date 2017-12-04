@@ -6,7 +6,7 @@ const postReducers = (state = {}, action) => {
         case UPDATE_POSTS:// when posts have been fetched
             return {
                 ...state,
-                all: action.data,
+                all: action.data.filter(post => !post.deleted),
             };
         default:
             return state;
