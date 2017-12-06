@@ -18,33 +18,31 @@ class CategoryView extends React.Component {
     /** this is called when we mount the first time, e.g. when coming from F5 or a bookmark */
     componentWillMount() {
         // console.log('CategoryView::componentWillMount', this.props);
-        this.props.initCategory(this.props.forCategory);
+        this.props.initCategory(this.props.categoryPath);
     }
 
     /** this is called when the route changes */
     componentWillReceiveProps(props) {
         // console.log('CategoryView::componentWillReceiveProps', props);
-        this.props.initCategory(props.forCategory);
+        this.props.initCategory(props.categoryPath);
     }
 }
 
 CategoryView.propTypes = {
-    forCategory: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            path: PropTypes.string,// can be null for the default category
-        }
-    ),
+    categoryPath: PropTypes.string,// can be null for the "all" category
+    initCategory: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, props) => {
-    // console.log('CategoryHeader::render', this.props);
-    return {forCategory: props.forCategory};
+    // console.log('CategoryView::mapStateToProps', state, props);
+    return {
+        categoryPath: props.categoryPath,
+    };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    initCategory: (category) => dispatch(changeToCategory(category, dispatch)),
+    initCategory: (categoryPath) => dispatch(changeToCategory(categoryPath, dispatch)),
 });
-
 
 export default connect(
     mapStateToProps,

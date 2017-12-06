@@ -1,4 +1,4 @@
-/** see this page for a little API overview. */
+/** see http://localhost:3001 or the README.md in the api-server folder for a complete overview. */
 const api = 'http://localhost:3001';
 
 
