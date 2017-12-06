@@ -14,8 +14,8 @@ const defaultData = {
             path: 'redux'
         },
         {
-            name: 'udacity',
-            path: 'udacity'
+            name: 'Star Citizen',
+            path: 'starcitizen'
         }
     ]
 };

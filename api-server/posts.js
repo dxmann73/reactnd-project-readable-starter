@@ -43,7 +43,7 @@ const defaultData = {
         body: 'Move along, nothing to see here :-)',
         author: 'apiserver',
         category: 'react',
-        voteScore: -5,
+        voteScore: 0,
         deleted: false,
         commentCount: 0
     }
