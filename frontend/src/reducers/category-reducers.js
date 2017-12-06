@@ -6,14 +6,15 @@ const categoryReducers = (state = {}, action) => {
     // console.log('categoryReducers', state, action);
     switch (action.type) {
         case UPDATE_CATEGORIES:// when categories have been fetched
-            action.data.categories.unshift(defaultCategory);
-            const byPath = {};
-            action.data.categories.forEach(cat => byPath[cat.path] = cat);
             // console.log('categoryReducers::UPDATE_CATEGORIES', action.data.categories, byPath);
+            action.data.categories.unshift(defaultCategory);
             return {
                 ...state,
                 all: action.data.categories,
-                byPath: byPath
+                byPath: action.data.categories.reduce((result, cat) => {
+                    result[cat.path] = cat;
+                    return result;
+                }, {}),
             };
         case CHANGE_TO_CATEGORY:// when the current category has been changed or is being initialized
             // console.log('categoryReducers::CHANGE_TO_CATEGORY', action, state);

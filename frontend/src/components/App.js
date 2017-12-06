@@ -11,6 +11,7 @@ import {defaultCategory} from '../reducers/category-reducers';
 
 class App extends React.Component {
     render() {
+        // console.log('App::render', this.props);
         const {categories} = this.props;
         return (
             <div className="app">
@@ -43,7 +44,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-    console.log('App::mapStateToProps ', state, props);
+    // console.log('App::mapStateToProps ', state, props);
     return {
         categories: state.categories.all,// we don't actually need them, but want to wait before we render the children
     };

@@ -9,6 +9,7 @@ import {votePostUp} from '../../actions/post-actions';
 
 class Post extends React.Component {
     render() {
+        // console.log('Post::render', this.props);
         const {post, categoryName, detailedMode, upVote} = this.props;
         /**
          * Still to implement:

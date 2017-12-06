@@ -21,6 +21,6 @@ export const getCategories = () =>
             return res.json();
         })
         .then(data => {
-            console.log('CategoryAPI::getCategories: ', data);
+            console.log('CategoryAPI::getCategories', data);
             return data;
         });

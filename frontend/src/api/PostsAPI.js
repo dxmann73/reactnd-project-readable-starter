@@ -40,8 +40,8 @@ export const getPosts = (categoryPath) =>
  * `POST /posts/:id` | Used for voting on a post. |
  *     **option** - [String]: Either `"upVote"` or `"downVote"`.
  */
-export const upVote = (postId) => vote('upVote');
-export const downVote = (postId) => vote('downVote');
+export const upVote = (postId) => vote(postId, 'upVote');
+export const downVote = (postId) => vote(postId, 'downVote');
 const vote = (postId, voteType) =>
     fetch(`${api}/posts/${postId}`,
         {
@@ -53,9 +53,9 @@ const vote = (postId, voteType) =>
             body: JSON.stringify({option: voteType}),
         })
         .then(res => {
-            return res.text();
+            return res.json();
         })
         .then(data => {
-            console.log('PostsAPI::vote: ', data);
+            console.log('PostsAPI::vote', data);
             return data;
         });
