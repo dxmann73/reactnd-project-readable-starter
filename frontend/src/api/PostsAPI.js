@@ -1,6 +1,18 @@
-/** see this page for a little API overview. */
+/** see http://localhost:3001 or the README.md in the api-server folder for a complete overview.
+ * `POST /posts` | Add a new post.
+ *     **id** UUID should be fine, but any unique id will work <br>
+ *     **timestamp** - [Timestamp] Can in whatever format you like, you can use `Date.now()` if you like. <br>
+ *     **title** - [String] <br>
+ *     **body** - [String] <br>
+ *     **author** - [String] <br>
+ *     **category** -  Any valid category
+ * `GET /posts/:id` | Get the details of a single post
+ * `PUT /posts/:id` | Edit the details of an existing post. |
+ *     **title** - [String] <br>
+ *     **body** - [String]
+ * `DELETE /posts/:id` | Sets the deleted flag for a post to 'true'. <br> Sets the parentDeleted flag for all child comments to 'true'.
+ */
 const api = 'http://localhost:3001';
-
 
 // Dummy auth token; expand here for multi-user functionality
 const token = 'dxmann73';
@@ -10,9 +22,8 @@ const headers = {
     'Authorization': token
 };
 
-
 /**
- * GET posts for a given category from the server
+ * `GET /posts` | Get all of the posts. Useful for the main page when no category is selected.
  * @return an array of posts in the form {id:num, timestamp:millis, title:string, body:string, author:string, category:string, voteScore:num, deleted:boolean, commentCount:num}
  */
 export const getPosts = (categoryPath) =>
@@ -22,5 +33,29 @@ export const getPosts = (categoryPath) =>
         })
         .then(data => {
             console.log('PostsAPI::getPosts: ', data);
+            return data;
+        });
+
+/**
+ * `POST /posts/:id` | Used for voting on a post. |
+ *     **option** - [String]: Either `"upVote"` or `"downVote"`.
+ */
+export const upVote = (postId) => vote('upVote');
+export const downVote = (postId) => vote('downVote');
+const vote = (postId, voteType) =>
+    fetch(`${api}/posts/${postId}`,
+        {
+            method: 'POST',
+            headers: {
+                ...headers,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({option: voteType}),
+        })
+        .then(res => {
+            return res.text();
+        })
+        .then(data => {
+            console.log('PostsAPI::vote: ', data);
             return data;
         });
