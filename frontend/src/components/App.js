@@ -46,7 +46,7 @@ App.propTypes = {
 const mapStateToProps = (state, props) => {
     // console.log('App::mapStateToProps ', state, props);
     return {
-        categories: state.categories.all,// we don't actually need them, but want to wait before we render the children
+        categories: state.categories.all,// we don't actually need them here, but want to wait for them to appear before we render the children
     };
 };
 
