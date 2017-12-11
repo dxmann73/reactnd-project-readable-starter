@@ -22,7 +22,7 @@ class CategoryDetails extends React.Component {
 
 CategoryDetails.propTypes = {
     category: CategoryType,
-    postIds: PropTypes.arrayOf(PropTypes.number.required).required,
+    postIds: PropTypes.arrayOf(PropTypes.string),
 };
 
 const mapStateToProps = (state, props) => {
