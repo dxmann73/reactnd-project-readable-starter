@@ -5,16 +5,12 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import {Link} from 'react-router-dom';
 import './Post.css';
-import {votePostUp} from '../../actions/post-actions';
+import {votePostDown, votePostUp} from '../../actions/post-actions';
 
 class Post extends React.Component {
     render() {
         // console.log('Post::render', this.props);
-        const {post, categoryName, detailedMode, upVote} = this.props;
-        /**
-         * Still to implement:
-         * "voteScore":6, TODO show score on post and interact directly, bypassing the post detail view
-         */
+        const {post, categoryName, detailedMode, upVote, downVote} = this.props;
         return <div className="post-main">
             <div className="post-vote-controls">
                 <div>
@@ -24,7 +20,7 @@ class Post extends React.Component {
                 </div>
                 <div>
                     <button type="button" className="post-vote-button" title="vote down"
-                    >-
+                            onClick={() => downVote(post.id)}>-
                     </button>
                 </div>
             </div>
@@ -56,6 +52,7 @@ Post.propTypes = {
     categoryName: PropTypes.string.isRequired,
     detailedMode: PropTypes.bool.isRequired,
     upVote: PropTypes.func.isRequired,
+    downVote: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
@@ -72,6 +69,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         upVote: (postId) => dispatch(votePostUp(postId)),
+        downVote: (postId) => dispatch(votePostDown(postId)),
     };
 };
 

@@ -1,30 +1,43 @@
-import {getPosts, upVote} from '../api/PostsAPI';
+import {downVote, getPosts, upVote} from '../api/PostsAPI';
 
 export const INIT_POSTS = 'INIT_POSTS';
+export const UPDATE_POST = 'UPDATE_POST';
 
 /** Thunk / async actions:
  * They return a function which takes dispatch as an argument and dispatches the action on promise resolve
  */
 export const fetchPosts = (categoryPath) => (dispatch) => {
     getPosts(categoryPath).then(data =>
-        dispatch(updatePosts(data))
+        dispatch(initPosts(data))
     );
 };
 
 export const votePostUp = (postId) => (dispatch) => {
     upVote(postId).then(data =>
-            console.log('upvoted; result: ', data)
-        // dispatch(updatePosts(data))
+        dispatch(updatePost(data))
     );
     // .catch(err =>   console.log('error when voting', err) // TODO some sort of global error handling?
 };
 
+export const votePostDown = (postId) => (dispatch) => {
+    downVote(postId).then(data =>
+        dispatch(updatePost(data))
+    );
+};
+
 /** Synchronous actions */
 /** Will update the posts in the store. Fired when posts have been returned from the API call.*/
-export const updatePosts = (data) => {
+export const initPosts = (posts) => {
     return {
         type: INIT_POSTS,
-        data
+        posts
     };
 };
 
+/** Will update the post in the store. Fired after voting or otherwise changing the post */
+export const updatePost = (post) => {
+    return {
+        type: UPDATE_POST,
+        post
+    };
+};

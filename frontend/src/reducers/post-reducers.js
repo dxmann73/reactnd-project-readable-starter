@@ -1,10 +1,10 @@
-import {INIT_POSTS} from '../actions/post-actions';
+import {INIT_POSTS, UPDATE_POST} from '../actions/post-actions';
 
 const postReducers = (state = {}, action) => {
     // console.log('postReducers', state, action);
     switch (action.type) {
         case INIT_POSTS:// when posts have been fetched
-            const posts = action.data.filter(post => !post.deleted);// disregard deleted posts
+            const posts = action.posts.filter(post => !post.deleted);// disregard deleted posts
             // all posts live directly in the state, with their ID as a key, so we can update them directly
             const newState = posts.reduce((result, post) => {
                 result[post.id] = post;
@@ -12,6 +12,11 @@ const postReducers = (state = {}, action) => {
             }, {});
             newState.ids = posts.map(post => post.id);
             return newState;
+        case UPDATE_POST:
+            return {
+                ...state,
+                [action.post.id]: action.post,
+            };
         default:
             return state;
     }
