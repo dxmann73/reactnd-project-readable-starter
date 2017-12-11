@@ -1,7 +1,7 @@
 import {getCategories} from '../api/CategoryAPI';
 import {fetchPosts} from './post-actions';
 
-export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES';
+export const INIT_CATEGORIES = 'INIT_CATEGORIES';
 export const CHANGE_TO_CATEGORY = 'CHANGE_TO_CATEGORY';
 
 /** Return a function which takes dispatch as an argument and dispatches the action on promise resolve */
@@ -27,7 +27,7 @@ export const changeToCategory = (categoryPath, dispatch) => {
 /** Will update the categories in the store. Fired when categories have been returned from the API call.*/
 export const updateCategories = (data) => {
     return {
-        type: UPDATE_CATEGORIES,
+        type: INIT_CATEGORIES,
         data
     };
 };

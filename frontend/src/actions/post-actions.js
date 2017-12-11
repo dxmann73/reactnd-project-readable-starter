@@ -1,6 +1,6 @@
 import {getPosts, upVote} from '../api/PostsAPI';
 
-export const UPDATE_POSTS = 'UPDATE_POSTS';
+export const INIT_POSTS = 'INIT_POSTS';
 
 /** Thunk / async actions:
  * They return a function which takes dispatch as an argument and dispatches the action on promise resolve
@@ -23,7 +23,7 @@ export const votePostUp = (postId) => (dispatch) => {
 /** Will update the posts in the store. Fired when posts have been returned from the API call.*/
 export const updatePosts = (data) => {
     return {
-        type: UPDATE_POSTS,
+        type: INIT_POSTS,
         data
     };
 };

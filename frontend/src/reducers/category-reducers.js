@@ -1,12 +1,12 @@
-import {CHANGE_TO_CATEGORY, UPDATE_CATEGORIES} from '../actions/category-actions';
+import {CHANGE_TO_CATEGORY, INIT_CATEGORIES} from '../actions/category-actions';
 
 export const defaultCategory = {name: 'all', path: null};
 
 const categoryReducers = (state = {}, action) => {
     // console.log('categoryReducers', state, action);
     switch (action.type) {
-        case UPDATE_CATEGORIES:// when categories have been fetched
-            // console.log('categoryReducers::UPDATE_CATEGORIES', action.data.categories, byPath);
+        case INIT_CATEGORIES:// when categories have been fetched
+            // console.log('categoryReducers::INIT_CATEGORIES', action.data.categories, byPath);
             action.data.categories.unshift(defaultCategory);
             return {
                 ...state,
