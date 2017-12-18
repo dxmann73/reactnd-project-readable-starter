@@ -4,6 +4,7 @@ import CategoryDetails from './CategoryDetails';
 import {connect} from 'react-redux';
 import {changeToCategory} from '../../actions/category-actions';
 import PropTypes from 'prop-types';
+import PostAdd from '../post/PostAdd';
 
 class CategoryView extends React.Component {
 
@@ -11,6 +12,7 @@ class CategoryView extends React.Component {
         // console.log('CategoryView::render', this.props);
         return <div className="category-main">
             <CategoryHeader />
+            <PostAdd />
             <CategoryDetails />
         </div>;
     }

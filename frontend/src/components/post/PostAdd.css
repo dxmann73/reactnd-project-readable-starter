@@ -1,0 +1,49 @@
+.category-add {
+    padding: 0.3em;
+    margin: 0.3em;
+}
+
+.category-add h4 {
+    margin-bottom: 0.25rem;
+}
+
+.post-title {
+    display: block;
+    width: 60rem;
+    font-weight: bold;
+    margin-bottom: 0.125rem;
+}
+
+.post-category {
+    display: block;
+    width: 60rem;
+    margin-bottom: 0.125rem;
+}
+
+.post-body {
+    display: block;
+    font-family: inherit;
+    resize: vertical;
+    width: 60rem;
+    margin: 0;
+}
+
+.post-add-controls {
+    margin-top: 0.5rem;
+}
+
+.post-add-controls button {
+    display: inline-block;
+    margin-right: 0.25rem;
+}
+
+.post-validation-errors ul {
+    margin: 0.125rem 0 0.5rem 0;
+    padding: 0 0 0 1.5rem;
+}
+
+.post-validation-errors li {
+    font-size: smaller;
+    color: red;
+    margin: 0;
+}
