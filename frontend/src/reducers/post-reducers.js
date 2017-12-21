@@ -1,4 +1,4 @@
-import {INIT_POSTS, UPDATE_POST} from '../actions/post-actions';
+import {INIT_POSTS, INSERT_POST, UPDATE_POST} from '../actions/post-actions';
 
 const postReducers = (state = {}, action) => {
     // console.log('postReducers', state, action);
@@ -16,6 +16,12 @@ const postReducers = (state = {}, action) => {
             return {
                 ...state,
                 [action.post.id]: action.post,
+            };
+        case INSERT_POST:
+            return {
+                ...state,
+                [action.post.id]: action.post,
+                ids: [action.post.id, ...state.ids],
             };
         default:
             return state;

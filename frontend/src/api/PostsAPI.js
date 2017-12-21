@@ -1,11 +1,4 @@
 /** see http://localhost:3001 or the README.md in the api-server folder for a complete overview.
- * `POST /posts` | Add a new post.
- *     **id** UUID should be fine, but any unique id will work <br>
- *     **timestamp** - [Timestamp] Can in whatever format you like, you can use `Date.now()` if you like. <br>
- *     **title** - [String] <br>
- *     **body** - [String] <br>
- *     **author** - [String] <br>
- *     **category** -  Any valid category
  * `GET /posts/:id` | Get the details of a single post
  * `PUT /posts/:id` | Edit the details of an existing post. |
  *     **title** - [String] <br>
@@ -57,5 +50,32 @@ const vote = (postId, voteType) =>
         })
         .then(data => {
             console.log('PostsAPI::vote', data);
+            return data;
+        });
+
+/**
+ * `POST /posts` | Add a new post.
+ *     **id** UUID should be fine, but any unique id will work <br>
+ *     **timestamp** - [Timestamp] Can in whatever format you like, you can use `Date.now()` if you like. <br>
+ *     **title** - [String] <br>
+ *     **body** - [String] <br>
+ *     **author** - [String] <br>
+ *     **category** -  Any valid category
+ */
+export const createPost = (post) =>
+    fetch(`${api}/posts`,
+        {
+            method: 'POST',
+            headers: {
+                ...headers,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(post),
+        })
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            console.log('PostsAPI::createPost', data);
             return data;
         });

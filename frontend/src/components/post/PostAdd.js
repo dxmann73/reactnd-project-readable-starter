@@ -1,5 +1,8 @@
 import React from 'react';
 import './PostAdd.css';
+import {createPost} from '../../actions/post-actions';
+import {connect} from 'react-redux';
+import shortid from 'shortid';
 
 class PostAdd extends React.Component {
     titleInput;
@@ -37,6 +40,7 @@ class PostAdd extends React.Component {
     addPost = () => {
         console.log('PostAdd::addPost');
         const post = {
+            id: shortid.generate(),
             timestamp: Date.now(),
             title: this.titleInput.value,
             body: this.bodyInput.value,
@@ -47,7 +51,7 @@ class PostAdd extends React.Component {
             return;
         }
         console.log('PostAdd::addPost -- about to add post', post);
-        // TODO API call
+        this.props.createPost(post);
         this.resetForm();
     };
 
@@ -87,4 +91,17 @@ class PostAdd extends React.Component {
     };
 }
 
-export default PostAdd;
+const mapStateToProps = (state, props) => {
+    // console.log('Post::mapStateToProps', state, props);
+    return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createPost: (post) => dispatch(createPost(post)),
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps)(PostAdd);
