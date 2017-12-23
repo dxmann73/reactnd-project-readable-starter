@@ -34,7 +34,7 @@
 }
 
 .post-subtitle {
-    display: inline-block;
+    display: block;
     font-size: small;
 }
 

@@ -8,15 +8,19 @@
 }
 
 .post-title {
-    display: block;
-    width: 60rem;
+    display: inline-block;
+    width: 45rem;
     font-weight: bold;
     margin-bottom: 0.125rem;
 }
 
+.post-category-span {
+    font-size: smaller;
+}
+
 .post-category {
-    display: block;
-    width: 60rem;
+    display: inline-block;
+    width: 10rem;
     margin-bottom: 0.125rem;
 }
 

@@ -3,6 +3,8 @@ import './PostAdd.css';
 import {createPost} from '../../actions/post-actions';
 import {connect} from 'react-redux';
 import shortid from 'shortid';
+import PropTypes from 'prop-types';
+import {CategoryType} from '../../types/Typedefs';
 
 class PostAdd extends React.Component {
     titleInput;
@@ -15,7 +17,8 @@ class PostAdd extends React.Component {
     }
 
     render() {
-        console.log('PostAdd::render', this.props, this.state);
+        // console.log('PostAdd::render', this.props, this.state);
+        const {categories, currentCategory} = this.props;
         return <div className="category-add">
             <h4>Add a post:</h4>
             {this.state.errors && this.state.errors.length > 0 &&
@@ -27,7 +30,13 @@ class PostAdd extends React.Component {
             }
             <div className="post-container">
                 <input id="postTitle" className="post-title" type="text" placeholder="Post title" ref={(val) => this.titleInput = val} />
-                <input id="postCategory" className="post-category" type="text" placeholder="Category path" ref={(val) => this.categoryInput = val} />
+                <span className="post-category-span"> in category </span>
+                <select id="postCategory" className="post-category"
+                        value={currentCategory.path || undefined}
+                        readOnly={!!currentCategory.path} disabled={!!currentCategory.path}
+                        ref={(val) => this.categoryInput = val}>
+                    {categories && categories.map(c => <option key={c.path} value={c.path}>{c.name}</option>)}
+                </select>
                 <textarea id="postBody" className="post-body" rows="6" placeholder="Post content" ref={(val) => this.bodyInput = val} />
             </div>
             <div className="post-add-controls">
@@ -60,30 +69,31 @@ class PostAdd extends React.Component {
         let valid = true;
         if (!post.title) {
             // this.titleInput.valid = false; TODO show validation state on field
-            this.setState((prev) => ({
-                errors: [...prev.errors, 'Please add a title']
-            }));
+            this.addError('Please add a title');
             valid = false;
         }
         if (!post.body) {
-            this.setState((prev) => ({
-                errors: [...prev.errors, 'Please add some content to your post']
-            }));
+            this.addError('Please add some content to your post');
             valid = false;
         }
         if (!post.category) {
-            this.setState((prev) => ({
-                errors: [...prev.errors, 'Internal error: Post needs a category! Please reload the page.']
-            }));
+            this.addError('Internal error: Post needs a category! Please reload the page.');
             valid = false;
         }
         return valid;
     };
 
+    addError = (message) => {
+        this.setState((prev) => ({
+            ...prev,
+            errors: [...prev.errors, message]
+        }));
+    };
+
     resetForm = () => {
         console.log('PostAdd::resetForm');
         this.resetErrors();
-        this.titleInput.value = this.bodyInput.value = this.categoryInput.value = '';
+        this.titleInput.value = this.bodyInput.value = '';
     };
 
     resetErrors = () => {
@@ -91,9 +101,18 @@ class PostAdd extends React.Component {
     };
 }
 
+PostAdd.propTypes = {
+    categories: PropTypes.arrayOf(CategoryType),
+    currentCategory: CategoryType,
+    createPost: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state, props) => {
     // console.log('Post::mapStateToProps', state, props);
-    return {};
+    return {
+        categories: state.categories.all.filter(c => !!c.path),// 'all' is not a valid category that users can post in
+        currentCategory: state.categories.currentCategory
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {

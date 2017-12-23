@@ -12,7 +12,7 @@ export const fetchCategories = () => (dispatch) => {
 };
 
 /**
- * Change the current category. Dispatches an action to fetch posts as wel
+ * Change the current category. Dispatches an action to fetch posts as well
  */
 export const changeToCategory = (categoryPath, dispatch) => {
     // disregard all previous posts, fetch the new ones

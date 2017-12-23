@@ -22,6 +22,7 @@
 
 .app-main {
     text-align: left;
+    padding-left: 0.75rem;
 }
 
 @keyframes App-logo-spin {

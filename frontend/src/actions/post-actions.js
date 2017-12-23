@@ -33,7 +33,7 @@ export const createPost = (post) => (dispatch) => {
 };
 
 /** Synchronous actions */
-/** Will update the posts in the store. Fired when posts have been returned from the API call.*/
+/** Will replace all posts in the store. Fired when posts have been returned from the API call.*/
 export const initPosts = (posts) => {
     return {
         type: INIT_POSTS,
