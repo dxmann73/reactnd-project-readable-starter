@@ -1,8 +1,11 @@
 .post-main {
+    margin-top: 0.25rem;
     display: inline-block;
+    width: 95%;
 }
 
 .post-vote-controls {
+    padding-top: 0.25rem;
     display: inline-block;
     vertical-align: top;
     width: 2.75rem;
@@ -18,10 +21,6 @@
 
 .post-vote-button-up {
     margin-bottom: 0.5rem;
-}
-
-.post-main {
-    width: 95%;
 }
 
 .post-title {
@@ -52,4 +51,8 @@
 
 .post-body {
     margin: 0.5em;
+}
+
+.post-comments {
+    font-size: smaller;
 }

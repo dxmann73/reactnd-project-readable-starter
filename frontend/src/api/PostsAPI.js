@@ -1,5 +1,5 @@
 /** see http://localhost:3001 or the README.md in the api-server folder for a complete overview.
- * `GET /posts/:id` | Get the details of a single post
+ *
  * `PUT /posts/:id` | Edit the details of an existing post. |
  *     **title** - [String] <br>
  *     **body** - [String]
@@ -26,6 +26,20 @@ export const getPosts = (categoryPath) =>
         })
         .then(data => {
             console.log('PostsAPI::getPosts: ', data);
+            return data;
+        });
+
+/**
+ * `GET /posts/:id` | Get the details of a single post
+ * @return a post in the form {id:num, timestamp:millis, title:string, body:string, author:string, category:string, voteScore:num, deleted:boolean, commentCount:num}
+ */
+export const getPost = (id) =>
+    fetch(`${api}/posts/${id}`, {headers})
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            console.log('PostsAPI::getPost: ', data);
             return data;
         });
 

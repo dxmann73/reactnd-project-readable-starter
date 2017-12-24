@@ -8,7 +8,7 @@ import Post from '../post/Post';
 class CategoryDetails extends React.Component {
     render() {
         // console.log('CategoryDetails::render', this.props);
-        let {category, postIds} = this.props;
+        const {category, postIds} = this.props;
         return <div className="category-details">
             <h4 className="category-heading">Posts for category '{category.name}':</h4>
             <ul className="category-posts">

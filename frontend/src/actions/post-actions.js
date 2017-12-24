@@ -1,6 +1,7 @@
 import * as PostsAPI from '../api/PostsAPI';
 
 export const INIT_POSTS = 'INIT_POSTS';
+export const INIT_POST = 'INIT_POST';
 export const INSERT_POST = 'INSERT_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const REORDER_POSTS = 'REORDER_POSTS';
@@ -15,6 +16,12 @@ export const ORDER_BY_SCORE_HIGHEST_FIRST = 'ORDER_BY_SCORE_HIGHEST_FIRST';
 export const fetchPosts = (categoryPath) => (dispatch) => {
     PostsAPI.getPosts(categoryPath).then(data =>
         dispatch(initPosts(data))
+    );
+};
+
+export const fetchPost = (postId) => (dispatch) => {
+    PostsAPI.getPost(postId).then(data =>
+        dispatch(initPost(data))
     );
 };
 
@@ -43,6 +50,14 @@ export const initPosts = (posts) => {
     return {
         type: INIT_POSTS,
         posts
+    };
+};
+
+/** Will replace one post in the store. Same mechanism as initPosts. Fired when one post has been re-fetched with an the API call.*/
+export const initPost = (post) => {
+    return {
+        type: INIT_POST,
+        post
     };
 };
 

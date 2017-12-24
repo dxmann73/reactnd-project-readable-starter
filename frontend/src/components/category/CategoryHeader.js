@@ -14,7 +14,7 @@ class CategoryHeader extends React.Component {
 
     render() {
         // console.log('CategoryHeader::render', this.props);
-        let {currentCategory, categories} = this.props;
+        const {currentCategory, categories} = this.props;
         return <div className="category-header">
             <div className="category-teaser">Categories:&nbsp;</div>
             {categories && categories.map(

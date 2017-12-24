@@ -1,4 +1,5 @@
 import {
+    INIT_POST,
     INIT_POSTS,
     INSERT_POST,
     ORDER_BY_SCORE_HIGHEST_FIRST,
@@ -23,6 +24,11 @@ const postReducers = (state = {sortMethod: ORDER_NEWEST_FIRST}, action) => {
             newState.sortMethod = state.sortMethod;
             newState.ids = posts.map(post => post.id);
             return newState;
+        case INIT_POST:// when a single post has been fetched
+            return {
+                ...state,
+                [action.post.id]: action.post,
+            };
         case UPDATE_POST:
             return {
                 ...state,

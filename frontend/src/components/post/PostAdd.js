@@ -92,7 +92,7 @@ class PostAdd extends React.Component {
                         ref={(val) => this.categoryInput = val}>
                     {categories && categories.map(c => <option key={c.path} value={c.path}>{c.name}</option>)}
                 </select>
-                <textarea id="postBody" className="post-body" rows="6" placeholder="Post content" ref={(val) => this.bodyInput = val} />
+                <textarea id="postBody" className="post-add-body" rows="6" placeholder="Post content" ref={(val) => this.bodyInput = val} />
             </div>
             <div className="post-add-controls">
                 <button type="button" title="Add post" onClick={() => this.addPost()}>Add post</button>

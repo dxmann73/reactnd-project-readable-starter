@@ -5,28 +5,31 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import {Link} from 'react-router-dom';
 import './Post.css';
-import {votePostDown, votePostUp} from '../../actions/post-actions';
+import {fetchPost, votePostDown, votePostUp} from '../../actions/post-actions';
 
 class Post extends React.Component {
     render() {
         // console.log('Post::render', this.props);
-        const {post, categoryName, detailedMode, upVote, downVote} = this.props;
+        const {post, categoryName, detailedMode, dispatchUpVote, dispatchDownVote} = this.props;
+        if (!post) {
+            return <h4>fetching post... </h4>;
+        }
         return <div className="post-main">
             <div className="post-vote-controls">
                 <div>
                     <button type="button" className="post-vote-button post-vote-button-up" title="vote up"
-                            onClick={() => upVote(post.id)}>+
+                            onClick={() => dispatchUpVote(post.id)}>+
                     </button>
                 </div>
                 <div>
                     <button type="button" className="post-vote-button" title="vote down"
-                            onClick={() => downVote(post.id)}>-
+                            onClick={() => dispatchDownVote(post.id)}>-
                     </button>
                 </div>
             </div>
             <div className="post-main">
                 <div className="post-title">
-                    <Link className="post-title-link" to={`/${post.category}/${post.id}`}>{post.title}</Link>
+                    <Link className="post-title-link" to={`/posts/${post.id}`}>{post.title}</Link>
                 </div>
                 <div className="post-subtitle">
                     <span>score {post.voteScore} | </span>
@@ -39,11 +42,19 @@ class Post extends React.Component {
                 <div className="post-body">
                     {post.body}
                 </div>}
-                <div className="post-controls">
-                    <Link className="post-permalink" to={`/${post.category}/${post.id}`}>{post.commentCount} comments</Link>
+                <div className="post-comments">
+                    <Link className="post-permalink" to={`/posts/${post.id}`}>{post.commentCount} comments</Link>
                 </div>
             </div>
         </div>;
+    }
+
+    /** when we mount the first time, and the post is not yet in the state, this means we come from a bookmark */
+    componentWillMount() {
+        // console.log('Post::componentWillMount', this.props);
+        if (!this.props.post) {
+            this.props.dispatchFetchPost(this.props.postId);
+        }
     }
 }
 
@@ -51,25 +62,28 @@ Post.propTypes = {
     post: PostType,
     categoryName: PropTypes.string.isRequired,
     detailedMode: PropTypes.bool.isRequired,
-    upVote: PropTypes.func.isRequired,
-    downVote: PropTypes.func.isRequired,
+    dispatchUpVote: PropTypes.func.isRequired,
+    dispatchDownVote: PropTypes.func.isRequired,
+    dispatchFetchPost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
     // console.log('Post::mapStateToProps', state, props);
     const post = state.posts[props.postId];
-    const categoryName = (state.categories.byPath && state.categories.byPath[post.category].name) || 'fetching categories...';
+    const categoryName = (post && state.categories.byPath && state.categories.byPath[post.category].name) || 'fetching...';
     return {
-        post: post,
-        categoryName: categoryName,
+        post,
+        postId: props.postId,
+        categoryName,
         detailedMode: props.detailedMode
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        upVote: (postId) => dispatch(votePostUp(postId)),
-        downVote: (postId) => dispatch(votePostDown(postId)),
+        dispatchUpVote: (postId) => dispatch(votePostUp(postId)),
+        dispatchDownVote: (postId) => dispatch(votePostDown(postId)),
+        dispatchFetchPost: (postId) => dispatch(fetchPost(postId)),
     };
 };
 
