@@ -20,7 +20,7 @@ class PostAdd extends React.Component {
         // console.log('PostAdd::render', this.props, this.state);
         const {categories, currentCategory} = this.props;
         return <div className="category-add">
-            <h4>Add a post:</h4>
+            <h4 className="category-add-heading">Add a post:</h4>
             {this.state.errors && this.state.errors.length > 0 &&
             <div className="post-validation-errors">
                 <ul>
@@ -84,6 +84,7 @@ class PostAdd extends React.Component {
     };
 
     addError = (message) => {
+        // TODO actually state should get merged, so no need to use spread, but double check this
         this.setState((prev) => ({
             ...prev,
             errors: [...prev.errors, message]
@@ -110,7 +111,7 @@ PostAdd.propTypes = {
 const mapStateToProps = (state, props) => {
     // console.log('Post::mapStateToProps', state, props);
     return {
-        categories: state.categories.all.filter(c => !!c.path),// 'all' is not a valid category that users can post in
+        categories: state.categories.all.filter(c => !!c.path),// 'all' has no path and is not a valid category that users can post in
         currentCategory: state.categories.currentCategory
     };
 };

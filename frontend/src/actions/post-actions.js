@@ -3,6 +3,11 @@ import * as PostsAPI from '../api/PostsAPI';
 export const INIT_POSTS = 'INIT_POSTS';
 export const INSERT_POST = 'INSERT_POST';
 export const UPDATE_POST = 'UPDATE_POST';
+export const REORDER_POSTS = 'REORDER_POSTS';
+
+export const ORDER_NEWEST_FIRST = 'ORDER_NEWEST_FIRST';
+export const ORDER_BY_SCORE_LOWEST_FIRST = 'ORDER_BY_SCORE_LOWEST_FIRST';
+export const ORDER_BY_SCORE_HIGHEST_FIRST = 'ORDER_BY_SCORE_HIGHEST_FIRST';
 
 /** Thunk / async actions:
  * They return a function which takes dispatch as an argument and dispatches the action on promise resolve
@@ -54,5 +59,13 @@ export const insertPost = (post) => {
     return {
         type: INSERT_POST,
         post
+    };
+};
+
+/** Will reorder the posts depending on sort type */
+export const reorderPosts = (sortMethod) => {
+    return {
+        type: REORDER_POSTS,
+        sortMethod,
     };
 };

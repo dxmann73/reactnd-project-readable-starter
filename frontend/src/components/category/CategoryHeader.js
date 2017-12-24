@@ -4,6 +4,7 @@ import './CategoryHeader.css';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {CategoryType} from '../../types/Typedefs';
+import {ORDER_NEWEST_FIRST, ORDER_BY_SCORE_LOWEST_FIRST, ORDER_BY_SCORE_HIGHEST_FIRST, reorderPosts} from '../../actions/post-actions';
 
 class CategoryHeader extends React.Component {
     render() {
@@ -17,13 +18,27 @@ class CategoryHeader extends React.Component {
                         <Link to={'/' + (cat.path || '')}>{cat.name}</Link>
                     </div>
             )}
+            <div className="category-sort">
+                <span>sort by</span>
+                <select ref={(val) => this.categoryInput = val} onChange={(val) => this.sort(val)}>
+                    <option value={ORDER_NEWEST_FIRST}>newest</option>
+                    <option value={ORDER_BY_SCORE_HIGHEST_FIRST}>top score</option>
+                    <option value={ORDER_BY_SCORE_LOWEST_FIRST}>bottom score</option>
+                </select>
+            </div>
         </div>;
     }
+
+    sort = (sortMethod) => {
+        // console.log('CategoryHeader::sort', sortMethod.target.value);
+        this.props.dispatchReorderPosts(sortMethod.target.value);
+    };
 }
 
 CategoryHeader.propTypes = {
     categories: PropTypes.arrayOf(CategoryType),
     currentCategory: CategoryType,
+    dispatchReorderPosts: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
@@ -34,6 +49,13 @@ const mapStateToProps = (state, props) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchReorderPosts: (sortMethod) => dispatch(reorderPosts(sortMethod))
+    };
+};
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(CategoryHeader);

@@ -20,7 +20,6 @@ export const changeToCategory = (categoryPath, dispatch) => {
     return {
         type: CHANGE_TO_CATEGORY,
         categoryPath,
-        dispatch
     };
 };
 
