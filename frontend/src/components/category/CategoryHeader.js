@@ -4,9 +4,14 @@ import './CategoryHeader.css';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {CategoryType} from '../../types/Typedefs';
-import {ORDER_NEWEST_FIRST, ORDER_BY_SCORE_LOWEST_FIRST, ORDER_BY_SCORE_HIGHEST_FIRST, reorderPosts} from '../../actions/post-actions';
+import {ORDER_BY_SCORE_HIGHEST_FIRST, ORDER_BY_SCORE_LOWEST_FIRST, ORDER_NEWEST_FIRST, reorderPosts} from '../../actions/post-actions';
 
 class CategoryHeader extends React.Component {
+    sort = (sortMethod) => {
+        // console.log('CategoryHeader::sort', sortMethod.target.value);
+        this.props.dispatchReorderPosts(sortMethod.target.value);
+    };
+
     render() {
         // console.log('CategoryHeader::render', this.props);
         let {currentCategory, categories} = this.props;
@@ -28,11 +33,6 @@ class CategoryHeader extends React.Component {
             </div>
         </div>;
     }
-
-    sort = (sortMethod) => {
-        // console.log('CategoryHeader::sort', sortMethod.target.value);
-        this.props.dispatchReorderPosts(sortMethod.target.value);
-    };
 }
 
 CategoryHeader.propTypes = {

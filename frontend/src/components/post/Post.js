@@ -58,7 +58,7 @@ Post.propTypes = {
 const mapStateToProps = (state, props) => {
     // console.log('Post::mapStateToProps', state, props);
     const post = state.posts[props.postId];
-    const categoryName = (state.categories.byPath && state.categories.byPath[post.category].name) || 'fetching...';
+    const categoryName = (state.categories.byPath && state.categories.byPath[post.category].name) || 'fetching categories...';
     return {
         post: post,
         categoryName: categoryName,

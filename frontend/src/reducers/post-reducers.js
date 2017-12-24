@@ -14,12 +14,13 @@ const postReducers = (state = {sortMethod: ORDER_NEWEST_FIRST}, action) => {
         case INIT_POSTS:// when posts have been fetched
             const posts = action.posts
                 .filter(post => !post.deleted)// disregard deleted posts
-                .sort(determineCompareFn(state.sortMethod));// default sort based on currently selected method
-            // all posts live in the state, with their ID as a key, so we can update them directly
+                .sort(withCompareFn(state.sortMethod));// default sort based on currently selected method
+            // flatten all posts into the state with their ID as a key, so we can update them directly
             const newState = posts.reduce((result, post) => {
                 result[post.id] = post;
                 return result;
             }, {});
+            newState.sortMethod = state.sortMethod;
             newState.ids = posts.map(post => post.id);
             return newState;
         case UPDATE_POST:
@@ -34,23 +35,21 @@ const postReducers = (state = {sortMethod: ORDER_NEWEST_FIRST}, action) => {
                 ids: [action.post.id, ...state.ids],
             };
         case REORDER_POSTS:
-            // determine compare function by sort method
-            const compareFn = determineCompareFn(action.sortMethod);
-            // reconstruct full post array from current ID array and sort it depending on method
-            const mappedPosts = state.ids.map(id => state[id]);
-            let orderedPosts = mappedPosts.sort(compareFn);
-            let resultingIds = orderedPosts.map(post => post.id);
+            const reorderedPostIds = state.ids
+                .map(id => state[id])// reconstruct full post array from current ID array
+                .sort(withCompareFn(action.sortMethod))// sort it depending on method
+                .map(post => post.id);// and re-map it to an ID array
             return {
                 ...state,
                 sortMethod: action.sortMethod,
-                ids: resultingIds,
+                ids: reorderedPostIds,
             };
         default:
             return state;
     }
 };
 
-const determineCompareFn = (sortMethod) => {
+const withCompareFn = (sortMethod) => {
     const scoreCompareFnLowestFirst = (a, b) => a.voteScore > b.voteScore ? 1 : b.voteScore > a.voteScore ? -1 : 0;
     switch (sortMethod) {
         case ORDER_BY_SCORE_LOWEST_FIRST:

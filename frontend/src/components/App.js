@@ -22,11 +22,11 @@ class App extends React.Component {
                     <div className="app-header-container">Welcome to Reddix</div>
                 </header>
                 {categories && <div className="app-main">
-                    <Route exact path="/" render={() =>
-                        <CategoryView categoryPath={defaultCategory.path} />
+                    <Route exact path="/:categoryPath?" render={(props) =>
+                        <CategoryView categoryPath={props.match.params.categoryPath || defaultCategory.path} />
                     } />
-                    <Route exact path="/:categoryPath" render={(props) =>
-                        <CategoryView categoryPath={props.match.params.categoryPath} />
+                    <Route exact path="/posts/:id" render={(props) =>
+                        <h1>{props.match.params.id}</h1>
                     } />
                 </div>
                 }

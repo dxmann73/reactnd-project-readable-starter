@@ -11,41 +11,6 @@ class PostAdd extends React.Component {
     categoryInput;
     bodyInput;
 
-    constructor(props) {
-        super(props);
-        this.state = {errors: []};
-    }
-
-    render() {
-        // console.log('PostAdd::render', this.props, this.state);
-        const {categories, currentCategory} = this.props;
-        return <div className="category-add">
-            <h4 className="category-add-heading">Add a post:</h4>
-            {this.state.errors && this.state.errors.length > 0 &&
-            <div className="post-validation-errors">
-                <ul>
-                    {this.state.errors.map((e, i) => <li key={i}>{e}</li>)}
-                </ul>
-            </div>
-            }
-            <div className="post-container">
-                <input id="postTitle" className="post-title" type="text" placeholder="Post title" ref={(val) => this.titleInput = val} />
-                <span className="post-category-span"> in category </span>
-                <select id="postCategory" className="post-category"
-                        value={currentCategory.path || undefined}
-                        readOnly={!!currentCategory.path} disabled={!!currentCategory.path}
-                        ref={(val) => this.categoryInput = val}>
-                    {categories && categories.map(c => <option key={c.path} value={c.path}>{c.name}</option>)}
-                </select>
-                <textarea id="postBody" className="post-body" rows="6" placeholder="Post content" ref={(val) => this.bodyInput = val} />
-            </div>
-            <div className="post-add-controls">
-                <button type="button" title="Add post" onClick={() => this.addPost()}>Add post</button>
-                <button type="button" title="Reset" onClick={() => this.resetForm()}>Reset</button>
-            </div>
-        </div>;
-    }
-
     addPost = () => {
         console.log('PostAdd::addPost');
         const post = {
@@ -100,6 +65,41 @@ class PostAdd extends React.Component {
     resetErrors = () => {
         this.setState({errors: {}});
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {errors: []};
+    }
+
+    render() {
+        // console.log('PostAdd::render', this.props, this.state);
+        const {categories, currentCategory} = this.props;
+        return <div className="category-add">
+            <h4 className="category-add-heading">Add a post:</h4>
+            {this.state.errors && this.state.errors.length > 0 &&
+            <div className="post-validation-errors">
+                <ul>
+                    {this.state.errors.map((e, i) => <li key={i}>{e}</li>)}
+                </ul>
+            </div>
+            }
+            <div className="post-container">
+                <input id="postTitle" className="post-title" type="text" placeholder="Post title" ref={(val) => this.titleInput = val} />
+                <span className="post-category-span"> in category </span>
+                <select id="postCategory" className="post-category"
+                        value={currentCategory.path || undefined}
+                        readOnly={!!currentCategory.path} disabled={!!currentCategory.path}
+                        ref={(val) => this.categoryInput = val}>
+                    {categories && categories.map(c => <option key={c.path} value={c.path}>{c.name}</option>)}
+                </select>
+                <textarea id="postBody" className="post-body" rows="6" placeholder="Post content" ref={(val) => this.bodyInput = val} />
+            </div>
+            <div className="post-add-controls">
+                <button type="button" title="Add post" onClick={() => this.addPost()}>Add post</button>
+                <button type="button" title="Reset" onClick={() => this.resetForm()}>Reset</button>
+            </div>
+        </div>;
+    }
 }
 
 PostAdd.propTypes = {
