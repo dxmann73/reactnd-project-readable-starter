@@ -1,0 +1,19 @@
+.vote-controls {
+    padding-top: 0.25rem;
+    display: inline-block;
+    vertical-align: top;
+    width: 2.75rem;
+    min-width: 2.25rem;
+}
+
+.vote-button {
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: 0.25rem;
+    margin-top: 0;
+}
+
+.vote-button-up {
+    margin-bottom: 0.5rem;
+}
+

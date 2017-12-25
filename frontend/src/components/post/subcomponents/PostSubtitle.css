@@ -1,0 +1,9 @@
+.post-subtitle {
+    display: block;
+    font-size: small;
+}
+
+.post-author {
+    color: midnightblue;
+    font-weight: bolder;
+}

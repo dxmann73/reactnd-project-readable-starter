@@ -13,7 +13,7 @@ class CategoryDetails extends React.Component {
             <h4 className="category-heading">Posts for category '{category.name}':</h4>
             <ul className="category-posts">
                 {postIds && postIds.map(postId =>
-                    <li className="posts-item" key={postId}><Post postId={postId} detailedMode={false} /></li>
+                    <li className="posts-item" key={postId}><Post postId={postId} /></li>
                 )}
             </ul>
         </div>;

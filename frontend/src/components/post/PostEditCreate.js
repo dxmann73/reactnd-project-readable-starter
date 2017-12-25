@@ -1,5 +1,5 @@
 import React from 'react';
-import './PostAdd.css';
+import './PostEditCreate.css';
 import {createPost} from '../../actions/post-actions';
 import {connect} from 'react-redux';
 import shortid from 'shortid';
@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import {CategoryType} from '../../types/Typedefs';
 import {addErrorFeedback, resetFeedback} from '../../actions/feedback-actions';
 
-class PostAdd extends React.Component {
+class PostEditCreate extends React.Component {
     titleInput;
     categoryInput;
     bodyInput;
@@ -48,7 +48,7 @@ class PostAdd extends React.Component {
     };
 
     render() {
-        // console.log('PostAdd::render', this.props, this.state);
+        // console.log('PostEditCreate::render', this.props, this.state);
         const {categories, currentCategory} = this.props;
         return <div className="category-add">
             <h4 className="category-add-heading">Add a post:</h4>
@@ -71,7 +71,7 @@ class PostAdd extends React.Component {
     }
 }
 
-PostAdd.propTypes = {
+PostEditCreate.propTypes = {
     categories: PropTypes.arrayOf(CategoryType),
     currentCategory: CategoryType,
     dispatchCreatePost: PropTypes.func.isRequired,
@@ -97,4 +97,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps)(PostAdd);
+    mapDispatchToProps)(PostEditCreate);

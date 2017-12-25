@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {fetchCategories} from '../actions/category-actions';
 import {defaultCategory} from '../reducers/category-reducers';
-import Post from './post/Post';
+import PostDetailView from './post/PostDetailView';
 import {CategoryType} from '../types/Typedefs';
 import Feedback from './feedback/Feedback';
 
@@ -32,7 +32,7 @@ class App extends React.Component {
                         <CategoryView categoryPath={props.match.params.categoryPath || defaultCategory.path} />
                     } />
                     <Route exact path="/posts/:id" render={(props) =>
-                        <Post postId={props.match.params.id} detailedMode={true} />
+                        <PostDetailView postId={props.match.params.id} />
                     } />
                 </div>
                 }
