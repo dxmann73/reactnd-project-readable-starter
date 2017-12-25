@@ -36,12 +36,12 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-        this.props.initCategories();
+        this.props.dispatchFetchCategories();
     }
 }
 
 App.propTypes = {
-    initCategories: PropTypes.func.isRequired,
+    dispatchFetchCategories: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
@@ -53,7 +53,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        initCategories: () => dispatch(fetchCategories()),
+        dispatchFetchCategories: () => dispatch(fetchCategories()),
     };
 };
 

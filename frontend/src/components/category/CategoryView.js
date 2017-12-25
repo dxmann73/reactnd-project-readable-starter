@@ -20,19 +20,19 @@ class CategoryView extends React.Component {
     /** this is called when we mount the first time, e.g. when coming from F5 or a bookmark */
     componentWillMount() {
         // console.log('CategoryView::componentWillMount', this.props);
-        this.props.initCategory(this.props.categoryPath);
+        this.props.dispatchChangeToCategory(this.props.categoryPath);
     }
 
     /** this is called when the route changes */
     componentWillReceiveProps(props) {
         // console.log('CategoryView::componentWillReceiveProps', props);
-        this.props.initCategory(props.categoryPath);
+        this.props.dispatchChangeToCategory(props.categoryPath);
     }
 }
 
 CategoryView.propTypes = {
     categoryPath: PropTypes.string,// can be null for the "all" category
-    initCategory: PropTypes.func.isRequired
+    dispatchChangeToCategory: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, props) => {
@@ -43,7 +43,7 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    initCategory: (categoryPath) => dispatch(changeToCategory(categoryPath, dispatch)),
+    dispatchChangeToCategory: (categoryPath) => dispatch(changeToCategory(categoryPath, dispatch)),
 });
 
 export default connect(
