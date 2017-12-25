@@ -9,12 +9,13 @@ import PropTypes from 'prop-types';
 import {fetchCategories} from '../actions/category-actions';
 import {defaultCategory} from '../reducers/category-reducers';
 import Post from './post/Post';
-import {CategoryType, MessageType} from '../types/Typedefs';
+import {CategoryType} from '../types/Typedefs';
+import Feedback from './feedback/Feedback';
 
 class App extends React.Component {
     render() {
         // console.log('App::render', this.props);
-        const {categories, messages} = this.props;
+        const {categories} = this.props;
         return (
             <div className="app">
                 <header className="app-header">
@@ -23,11 +24,9 @@ class App extends React.Component {
                     </div>
                     <div className="app-header-container">Welcome to Reddix</div>
                 </header>
-                {messages && <div className="app-feedback-container">
-                    <ul>
-                        {messages.map(m => <li key={m.message}>{m.message}</li>)}
-                    </ul>
-                </div>}
+                <div className="app-feedback-container">
+                    <Feedback />
+                </div>
                 {categories && <div className="app-main">
                     <Route exact path="/:categoryPath?" render={(props) =>
                         <CategoryView categoryPath={props.match.params.categoryPath || defaultCategory.path} />
@@ -47,7 +46,6 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    messages: PropTypes.arrayOf(MessageType),
     categories: PropTypes.arrayOf(CategoryType),
     dispatchFetchCategories: PropTypes.func.isRequired,
 };
@@ -55,12 +53,12 @@ App.propTypes = {
 const mapStateToProps = (state, props) => {
     // console.log('App::mapStateToProps ', state, props);
     return {
-        messages: state.feedback.messages,
         categories: state.categories.all,// we don't actually need them here, but want to wait for them to appear before we render the children
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
+    // console.log('App::mapDispatchToProps ', dispatch);
     return {
         dispatchFetchCategories: () => dispatch(fetchCategories()),
     };

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
 import {CategoryType} from '../../types/Typedefs';
+import {addErrorFeedback, resetFeedback} from '../../actions/feedback-actions';
 
 class PostAdd extends React.Component {
     titleInput;
@@ -12,7 +13,6 @@ class PostAdd extends React.Component {
     bodyInput;
 
     addPost = () => {
-        console.log('PostAdd::addPost');
         const post = {
             id: shortid.generate(),
             timestamp: Date.now(),
@@ -24,59 +24,34 @@ class PostAdd extends React.Component {
         if (!this.validate(post)) {
             return;
         }
-        console.log('PostAdd::addPost -- about to add post', post);
         this.props.dispatchCreatePost(post);
         this.resetForm();
     };
 
     validate = (post) => {
-        this.resetErrors();
+        this.props.dispatchResetFeedback();
         let valid = true;
         if (!post.title) {
-            // this.titleInput.valid = false; TODO show validation state on field
-            this.addError('Please add a title');
+            this.props.dispatchAddError('Please add a title');
             valid = false;
         }
         if (!post.body) {
-            this.addError('Please add some content to your post');
+            this.props.dispatchAddError('Please add some content to your post');
             valid = false;
         }
         return valid;
     };
 
-    addError = (message) => {
-        this.setState((prev) => ({
-            errors: [...prev.errors, message]
-        }));
-    };
-
     resetForm = () => {
-        console.log('PostAdd::resetForm');
-        this.resetErrors();
+        this.props.dispatchResetFeedback();
         this.titleInput.value = this.bodyInput.value = '';
     };
-
-    resetErrors = () => {
-        this.setState({errors: {}});
-    };
-
-    constructor(props) {
-        super(props);
-        this.state = {errors: []};
-    }
 
     render() {
         // console.log('PostAdd::render', this.props, this.state);
         const {categories, currentCategory} = this.props;
         return <div className="category-add">
             <h4 className="category-add-heading">Add a post:</h4>
-            {this.state.errors && this.state.errors.length > 0 &&
-            <div className="post-validation-errors">
-                <ul>
-                    {this.state.errors.map((e, i) => <li key={i}>{e}</li>)}
-                </ul>
-            </div>
-            }
             <div className="post-container">
                 <input id="postTitle" className="post-title" type="text" placeholder="Post title" ref={(val) => this.titleInput = val} />
                 <span className="post-category-span"> in category </span>
@@ -100,6 +75,8 @@ PostAdd.propTypes = {
     categories: PropTypes.arrayOf(CategoryType),
     currentCategory: CategoryType,
     dispatchCreatePost: PropTypes.func.isRequired,
+    dispatchAddError: PropTypes.func.isRequired,
+    dispatchResetFeedback: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
@@ -113,6 +90,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchCreatePost: (post) => dispatch(createPost(post)),
+        dispatchAddError: (msg) => dispatch(addErrorFeedback(msg)),
+        dispatchResetFeedback: () => dispatch(resetFeedback()),
     };
 };
 

@@ -1,0 +1,27 @@
+.feedback-main {
+    width: 100%;
+}
+
+.feedback-dismiss {
+    display: inline-block;
+}
+
+.feedback-list-container {
+    display: inline-block;
+    font-size: smaller;
+    width: 99%;
+}
+
+.feedback-list-container ul {
+    list-style: none;
+    background-color: white;
+    margin: 0.25rem 0 0.25rem 0;
+}
+
+.feedback-list-container ul > li.error {
+    color: red;
+}
+
+.feedback-list-container ul > li.info {
+    color: black;
+}
