@@ -16,9 +16,9 @@ export const getPost = (id) => BaseAPI.doGet(`posts/${id}`);
  * `POST /posts/:id` | Used for voting on a post. |
  *     **option** - [String]: Either `"upVote"` or `"downVote"`.
  */
-export const upVote = (postId) => vote(postId, 'upVote');
-export const downVote = (postId) => vote(postId, 'downVote');
-const vote = (postId, voteType) => BaseAPI.doPost(`posts/${postId}`, {option: voteType});
+export const upVote = (id) => vote(id, 'upVote');
+export const downVote = (id) => vote(id, 'downVote');
+const vote = (id, voteType) => BaseAPI.doPost(`posts/${id}`, {option: voteType});
 
 /**
  * `POST /posts` | Add a new post.
@@ -36,9 +36,9 @@ export const createPost = (post) => BaseAPI.doPost(`posts`, post);
  *     **title** - [String] <br>
  *     **body** - [String]
  */
-export const editPost = (postId, post) => BaseAPI.doPut(`posts/${postId}`, post);
+export const editPost = (id, post) => BaseAPI.doPut(`posts/${id}`, post);
 
 /**
  * `DELETE /posts/:id` | Sets the deleted flag for a post to 'true'. <br> Sets the parentDeleted flag for all child comments to 'true'.
  */
-export const deletePost = (postId) => BaseAPI.doDelete(`posts/${postId}`);
+export const deletePost = (id) => BaseAPI.doDelete(`posts/${id}`);

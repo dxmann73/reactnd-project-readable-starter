@@ -20,6 +20,14 @@
     padding-top: 0.4em;
 }
 
+.app-feedback-container {
+    padding: 0 0 0.25em 0.25em;
+}
+
+.app-feedback-container ul {
+    list-style: none;
+}
+
 .app-main {
     text-align: left;
     padding-left: 0.75rem;

@@ -1,4 +1,4 @@
-import {noop} from '../api/BaseAPI';
+import {noop} from '../actions/feedback-actions';
 import * as PostsAPI from '../api/PostsAPI';
 
 export const INIT_POSTS = 'INIT_POSTS';

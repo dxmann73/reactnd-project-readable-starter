@@ -76,27 +76,12 @@ export const doDelete = (path) =>
         .then(throwIfStatusNotOk)
         .catch(handleAndRethrowError);
 
-/** convenience method for API consumers that don't want to handle errors */
-export const noop = () => {
-};
-
-/** convenience method for API consumers that want to handle errors by adding an error message to the global feedback panel */
-export const userErrorFeedbackHandler = (msg) => () => {
-    addUserErrorFeedback(msg);
-};
-
-const addUserErrorFeedback = (msg) => {
-    console.log('Error in BaseAPI::doGet', msg);
-    // TODO add global error feedback here
-};
-
 /**
  * Internal methods
  */
 const handleAndRethrowError = (error) => {
     const msg = error.message || error;
-    addUserErrorFeedback(msg);
-    throw error;
+    throw new Error(msg);// maybe add URL later
 };
 
 const extractJson = (response) => {

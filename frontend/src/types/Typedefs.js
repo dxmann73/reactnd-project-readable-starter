@@ -18,3 +18,9 @@ export const PostType = PropTypes.shape({
         commentCount: PropTypes.number.isRequired,
     }
 );
+
+export const MessageType = PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        message: PropTypes.string.isRequired,
+    }
+);
