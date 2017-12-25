@@ -24,14 +24,14 @@ export const fetchPost = (postId) => (dispatch) => {
     );
 };
 
-export const votePostUp = (postId) => (dispatch) => {
+export const upVote = (postId) => (dispatch) => {
     PostsAPI.upVote(postId).then(data =>
         dispatch(updatePost(data))
     );
     // .catch(err =>   console.log('error when voting', err) // TODO some sort of global error handling?
 };
 
-export const votePostDown = (postId) => (dispatch) => {
+export const downVote = (postId) => (dispatch) => {
     PostsAPI.downVote(postId).then(data =>
         dispatch(updatePost(data))
     );

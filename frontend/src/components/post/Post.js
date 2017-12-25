@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import {Link} from 'react-router-dom';
 import './Post.css';
-import {fetchPost, votePostDown, votePostUp} from '../../actions/post-actions';
+import {fetchPost, downVote, upVote} from '../../actions/post-actions';
 
 class Post extends React.Component {
     render() {
@@ -82,8 +82,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchUpVote: (postId) => dispatch(votePostUp(postId)),
-        dispatchDownVote: (postId) => dispatch(votePostDown(postId)),
+        dispatchUpVote: (postId) => dispatch(upVote(postId)),
+        dispatchDownVote: (postId) => dispatch(downVote(postId)),
         dispatchFetchPost: (postId) => dispatch(fetchPost(postId)),
     };
 };
