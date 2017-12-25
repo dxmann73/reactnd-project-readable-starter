@@ -1,3 +1,4 @@
+import {noop} from '../api/BaseAPI';
 import * as PostsAPI from '../api/PostsAPI';
 
 export const INIT_POSTS = 'INIT_POSTS';
@@ -13,34 +14,33 @@ export const ORDER_BY_SCORE_HIGHEST_FIRST = 'ORDER_BY_SCORE_HIGHEST_FIRST';
  * They return a function which takes dispatch as an argument and dispatches the action on promise resolve
  */
 export const fetchPosts = (categoryPath) => (dispatch) => {
-    PostsAPI.getPosts(categoryPath).then(data =>
-        dispatch(initPosts(data))
-    );
+    PostsAPI.getPosts(categoryPath)
+        .then(data => dispatch(initPosts(data)))
+        .catch(noop);
 };
 
 export const fetchPost = (postId) => (dispatch) => {
-    PostsAPI.getPost(postId).then(data =>
-        dispatch(updatePost(data))
-    );
+    PostsAPI.getPost(postId)
+        .then(data => dispatch(updatePost(data)))
+        .catch(noop);
 };
 
 export const upVote = (postId) => (dispatch) => {
-    PostsAPI.upVote(postId).then(data =>
-        dispatch(updatePost(data))
-    );
-    // .catch(err =>   console.log('error when voting', err) // TODO some sort of global error handling?
+    PostsAPI.upVote(postId)
+        .then(data => dispatch(updatePost(data)))
+        .catch(noop);
 };
 
 export const downVote = (postId) => (dispatch) => {
-    PostsAPI.downVote(postId).then(data =>
-        dispatch(updatePost(data))
-    );
+    PostsAPI.downVote(postId)
+        .then(data => dispatch(updatePost(data)))
+        .catch(noop);
 };
 
 export const createPost = (post) => (dispatch) => {
-    PostsAPI.createPost(post).then(data =>
-        dispatch(insertPost(data))
-    );
+    PostsAPI.createPost(post)
+        .then(data => dispatch(insertPost(data)))
+        .catch(noop);
 };
 
 /** Synchronous actions */

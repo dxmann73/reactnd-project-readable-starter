@@ -1,3 +1,4 @@
+import {userErrorFeedbackHandler} from '../api/BaseAPI';
 import {getCategories} from '../api/CategoryAPI';
 import {fetchPosts} from './post-actions';
 
@@ -6,9 +7,9 @@ export const CHANGE_TO_CATEGORY = 'CHANGE_TO_CATEGORY';
 
 /** Return a function which takes dispatch as an argument and dispatches the action on promise resolve */
 export const fetchCategories = () => (dispatch) => {
-    getCategories().then(data =>
-        dispatch(updateCategories(data))
-    );
+    getCategories()
+        .then(data => dispatch(updateCategories(data)))
+        .catch(userErrorFeedbackHandler('Sorry, but we were not able to fetch categories from the server right now. Try reloading the page.'));
 };
 
 /**
@@ -30,4 +31,3 @@ export const updateCategories = (data) => {
         data
     };
 };
-
