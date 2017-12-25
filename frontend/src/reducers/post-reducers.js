@@ -1,5 +1,4 @@
 import {
-    INIT_POST,
     INIT_POSTS,
     INSERT_POST,
     ORDER_BY_SCORE_HIGHEST_FIRST,
@@ -17,19 +16,14 @@ const postReducers = (state = {sortMethod: ORDER_NEWEST_FIRST}, action) => {
                 .filter(post => !post.deleted)// disregard deleted posts
                 .sort(withCompareFn(state.sortMethod));// default sort based on currently selected method
             // flatten all posts into the state with their ID as a key, so we can update them directly
-            const newState = posts.reduce((result, post) => {
-                result[post.id] = post;
-                return result;
+            const newState = posts.reduce((state, post) => {
+                state[post.id] = post;
+                return state;
             }, {});
             newState.sortMethod = state.sortMethod;
             newState.ids = posts.map(post => post.id);
             return newState;
-        case INIT_POST:// when a single post has been fetched
-            return {
-                ...state,
-                [action.post.id]: action.post,
-            };
-        case UPDATE_POST:
+        case UPDATE_POST:// when a single post has been fetched or updated
             return {
                 ...state,
                 [action.post.id]: action.post,
@@ -44,7 +38,7 @@ const postReducers = (state = {sortMethod: ORDER_NEWEST_FIRST}, action) => {
             const reorderedPostIds = state.ids
                 .map(id => state[id])// reconstruct full post array from current ID array
                 .sort(withCompareFn(action.sortMethod))// sort it depending on method
-                .map(post => post.id);// and re-map it to an ID array
+                .map(post => post.id);// and re-map it to an array of IDs
             return {
                 ...state,
                 sortMethod: action.sortMethod,

@@ -1,7 +1,6 @@
 import * as PostsAPI from '../api/PostsAPI';
 
 export const INIT_POSTS = 'INIT_POSTS';
-export const INIT_POST = 'INIT_POST';
 export const INSERT_POST = 'INSERT_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const REORDER_POSTS = 'REORDER_POSTS';
@@ -21,7 +20,7 @@ export const fetchPosts = (categoryPath) => (dispatch) => {
 
 export const fetchPost = (postId) => (dispatch) => {
     PostsAPI.getPost(postId).then(data =>
-        dispatch(initPost(data))
+        dispatch(updatePost(data))
     );
 };
 
@@ -53,15 +52,7 @@ export const initPosts = (posts) => {
     };
 };
 
-/** Will replace one post in the store. Same mechanism as initPosts. Fired when one post has been re-fetched with an the API call.*/
-export const initPost = (post) => {
-    return {
-        type: INIT_POST,
-        post
-    };
-};
-
-/** Will update the post in the store. Fired after voting or otherwise changing the post */
+/** Will update the post in the store by replacing it. Fired after voting or otherwise changing the post as well as when post has been (re-)fetched */
 export const updatePost = (post) => {
     return {
         type: UPDATE_POST,

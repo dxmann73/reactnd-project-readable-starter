@@ -60,6 +60,7 @@ class Post extends React.Component {
 
 Post.propTypes = {
     post: PostType,
+    postId: PropTypes.string.isRequired,
     categoryName: PropTypes.string.isRequired,
     detailedMode: PropTypes.bool.isRequired,
     dispatchUpVote: PropTypes.func.isRequired,

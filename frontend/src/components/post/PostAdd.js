@@ -25,7 +25,7 @@ class PostAdd extends React.Component {
             return;
         }
         console.log('PostAdd::addPost -- about to add post', post);
-        this.props.createPost(post);
+        this.props.dispatchCreatePost(post);
         this.resetForm();
     };
 
@@ -41,17 +41,11 @@ class PostAdd extends React.Component {
             this.addError('Please add some content to your post');
             valid = false;
         }
-        if (!post.category) {
-            this.addError('Internal error: Post needs a category! Please reload the page.');
-            valid = false;
-        }
         return valid;
     };
 
     addError = (message) => {
-        // TODO actually state should get merged, so no need to use spread, but double check this
         this.setState((prev) => ({
-            ...prev,
             errors: [...prev.errors, message]
         }));
     };
@@ -105,7 +99,7 @@ class PostAdd extends React.Component {
 PostAdd.propTypes = {
     categories: PropTypes.arrayOf(CategoryType),
     currentCategory: CategoryType,
-    createPost: PropTypes.func.isRequired,
+    dispatchCreatePost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
@@ -118,7 +112,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createPost: (post) => dispatch(createPost(post)),
+        dispatchCreatePost: (post) => dispatch(createPost(post)),
     };
 };
 
