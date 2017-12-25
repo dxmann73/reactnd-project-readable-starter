@@ -8,7 +8,7 @@ import {
     UPDATE_POST
 } from '../actions/post-actions';
 
-const postReducers = (state = {sortMethod: ORDER_NEWEST_FIRST}, action) => {
+const postReducers = (state = {sortMethod: ORDER_BY_SCORE_HIGHEST_FIRST}, action) => {
     // console.log('postReducers', state, action);
     switch (action.type) {
         case INIT_POSTS:// when posts have been fetched
@@ -52,13 +52,13 @@ const postReducers = (state = {sortMethod: ORDER_NEWEST_FIRST}, action) => {
 const withCompareFn = (sortMethod) => {
     const scoreCompareFnLowestFirst = (a, b) => a.voteScore > b.voteScore ? 1 : b.voteScore > a.voteScore ? -1 : 0;
     switch (sortMethod) {
+        case ORDER_NEWEST_FIRST:
+            return (a, b) => b.timestamp - a.timestamp;
         case ORDER_BY_SCORE_LOWEST_FIRST:
             return scoreCompareFnLowestFirst;
         case ORDER_BY_SCORE_HIGHEST_FIRST:
-            return (a, b) => -scoreCompareFnLowestFirst(a, b);
-        case ORDER_NEWEST_FIRST:
         default:
-            return (a, b) => b.timestamp - a.timestamp;
+            return (a, b) => -scoreCompareFnLowestFirst(a, b);
     }
 };
 

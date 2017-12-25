@@ -26,8 +26,8 @@ class CategoryHeader extends React.Component {
             <div className="category-sort">
                 <span>sort by</span>
                 <select ref={(val) => this.categoryInput = val} onChange={(val) => this.sort(val)}>
-                    <option value={ORDER_NEWEST_FIRST}>newest</option>
                     <option value={ORDER_BY_SCORE_HIGHEST_FIRST}>top score</option>
+                    <option value={ORDER_NEWEST_FIRST}>newest</option>
                     <option value={ORDER_BY_SCORE_LOWEST_FIRST}>bottom score</option>
                 </select>
             </div>
