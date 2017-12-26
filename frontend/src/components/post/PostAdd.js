@@ -1,13 +1,14 @@
 import React from 'react';
-import './PostEditCreate.css';
+import './PostAdd.css';
 import {createPost} from '../../actions/post-actions';
 import {connect} from 'react-redux';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
 import {CategoryType} from '../../types/Typedefs';
 import {addErrorFeedback, resetFeedback} from '../../actions/feedback-actions';
+import {defaultCategory} from '../../reducers/category-reducers';
 
-class PostEditCreate extends React.Component {
+class PostAdd extends React.Component {
     titleInput;
     categoryInput;
     bodyInput;
@@ -48,7 +49,7 @@ class PostEditCreate extends React.Component {
     };
 
     render() {
-        // console.log('PostEditCreate::render', this.props, this.state);
+        // console.log('PostAdd::render', this.props, this.state);
         const {categories, currentCategory} = this.props;
         return <div className="category-add">
             <h4 className="category-add-heading">Add a post:</h4>
@@ -71,7 +72,7 @@ class PostEditCreate extends React.Component {
     }
 }
 
-PostEditCreate.propTypes = {
+PostAdd.propTypes = {
     categories: PropTypes.arrayOf(CategoryType),
     currentCategory: CategoryType,
     dispatchCreatePost: PropTypes.func.isRequired,
@@ -83,7 +84,7 @@ const mapStateToProps = (state, props) => {
     // console.log('Post::mapStateToProps', state, props);
     return {
         categories: state.categories.all.filter(c => !!c.path),// 'all' has no path and is not a valid category that users can post in
-        currentCategory: state.categories.currentCategory
+        currentCategory: state.categories.currentCategory || defaultCategory, // can be undefined when user bookmarks it
     };
 };
 
@@ -97,4 +98,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps)(PostEditCreate);
+    mapDispatchToProps)(PostAdd);

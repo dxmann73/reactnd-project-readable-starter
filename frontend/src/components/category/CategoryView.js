@@ -4,26 +4,24 @@ import CategoryDetails from './CategoryDetails';
 import {connect} from 'react-redux';
 import {changeToCategory} from '../../actions/category-actions';
 import PropTypes from 'prop-types';
-import PostEditCreate from '../post/PostEditCreate';
 
 class CategoryView extends React.Component {
 
     render() {
         // console.log('CategoryView::render', this.props);
         return <div className="category-main">
-            <CategoryHeader />
-            <PostEditCreate />
+            <CategoryHeader showSort={true} />
             <CategoryDetails />
         </div>;
     }
 
-    /** this is called when we mount the first time, e.g. when coming from F5 or a bookmark */
+    /** called when we mount the first time (F5 or bookmark), or the route changes from another component */
     componentWillMount() {
         // console.log('CategoryView::componentWillMount', this.props);
         this.props.dispatchChangeToCategory(this.props.categoryPath);
     }
 
-    /** this is called when the route changes */
+    /** called when the route changes for the same component */
     componentWillReceiveProps(props) {
         // console.log('CategoryView::componentWillReceiveProps', props);
         this.props.dispatchChangeToCategory(props.categoryPath);

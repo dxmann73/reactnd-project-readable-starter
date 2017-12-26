@@ -8,7 +8,7 @@ import VoteControls from '../shared/VoteControls';
 import PostTitle from './subcomponents/PostTitle';
 import PostSubtitle from './subcomponents/PostSubtitle';
 
-class PostDetailView extends React.Component {
+class PostDetails extends React.Component {
     render() {
         // console.log('Post::render', this.props);
         const {post, categoryName, dispatchUpVote, dispatchDownVote} = this.props;
@@ -16,6 +16,7 @@ class PostDetailView extends React.Component {
             return <h4>fetching post... </h4>;
         }
         return <div className="post-main">
+            <h4 className="category-heading">Post details with comments:</h4>
             <VoteControls upVoteHandler={() => dispatchUpVote(post.id)} downVoteHandler={() => dispatchDownVote(post.id)} />
             <div className="post-main">
                 <PostTitle post={post} />
@@ -30,7 +31,7 @@ class PostDetailView extends React.Component {
         </div>;
     }
 
-    /** when we mount the first time, and the post is not yet in the state, this means we come from a bookmark */
+    /** when the component is mounted, and the post is not yet in the state, this means we come from a bookmark or F5 */
     componentWillMount() {
         // console.log('Post::componentWillMount', this.props);
         if (!this.props.post) {
@@ -39,7 +40,7 @@ class PostDetailView extends React.Component {
     }
 }
 
-PostDetailView.propTypes = {
+PostDetails.propTypes = {
     post: PostType,
     postId: PropTypes.string.isRequired,
     categoryName: PropTypes.string.isRequired,
@@ -69,4 +70,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps)(PostDetailView);
+    mapDispatchToProps)(PostDetails);

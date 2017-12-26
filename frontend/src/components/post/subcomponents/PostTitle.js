@@ -4,10 +4,10 @@ import {PostType} from '../../../types/Typedefs';
 import {Link} from 'react-router-dom';
 
 class PostTitle extends React.Component {
-    render(){
-        const{id,title}=this.props.post;
+    render() {
+        const {id, title} = this.props.post;
         return <div className="post-title">
-            <Link className="post-title-link" to={`/posts/${id}`}>{title}</Link>
+            <Link className="post-title-link" to={`/post-details/${id}`}>{title}</Link>
         </div>;
     }
 }

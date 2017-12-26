@@ -19,7 +19,7 @@ class Post extends React.Component {
                 <PostTitle post={post} />
                 <PostSubtitle post={post} categoryName={categoryName} />
                 <div className="post-comments">
-                    <Link className="post-permalink" to={`/posts/${post.id}`}>{post.commentCount} comments</Link>
+                    <Link className="post-permalink" to={`/post-details/${post.id}`}>{post.commentCount} comments</Link>
                 </div>
             </div>
         </div>;
