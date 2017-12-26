@@ -14,6 +14,8 @@ export const addFeedback = (feedbackType, feedbackMessage) => ({
     feedbackMessage,
 });
 
+export const addInfoFeedback = (error) => addFeedback(FEEDBACKTYPE_INFO, error.message || error);
+
 /** works for both messages and instances of Error() */
 export const addErrorFeedback = (error) => addFeedback(FEEDBACKTYPE_ERROR, error.message || error);
 

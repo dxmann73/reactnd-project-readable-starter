@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
 import {CategoryType} from '../../types/Typedefs';
-import {addErrorFeedback, resetFeedback} from '../../actions/feedback-actions';
+import {addErrorFeedback, addInfoFeedback, resetFeedback} from '../../actions/feedback-actions';
 import {defaultCategory} from '../../reducers/category-reducers';
 
 class PostAdd extends React.Component {
@@ -27,17 +27,18 @@ class PostAdd extends React.Component {
         }
         this.props.dispatchCreatePost(post);
         this.resetForm();
+        this.props.dispatchAddInfoFeedback('Success! Your post has been created!');
     };
 
     validate = (post) => {
         this.props.dispatchResetFeedback();
         let valid = true;
         if (!post.title) {
-            this.props.dispatchAddError('Please add a title');
+            this.props.dispatchAddErrorFeedback('Please add a title');
             valid = false;
         }
         if (!post.body) {
-            this.props.dispatchAddError('Please add some content to your post');
+            this.props.dispatchAddErrorFeedback('Please add some content to your post');
             valid = false;
         }
         return valid;
@@ -76,7 +77,7 @@ PostAdd.propTypes = {
     categories: PropTypes.arrayOf(CategoryType),
     currentCategory: CategoryType,
     dispatchCreatePost: PropTypes.func.isRequired,
-    dispatchAddError: PropTypes.func.isRequired,
+    dispatchAddErrorFeedback: PropTypes.func.isRequired,
     dispatchResetFeedback: PropTypes.func.isRequired,
 };
 
@@ -91,7 +92,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchCreatePost: (post) => dispatch(createPost(post)),
-        dispatchAddError: (msg) => dispatch(addErrorFeedback(msg)),
+        dispatchAddInfoFeedback: (msg) => dispatch(addInfoFeedback(msg)),
+        dispatchAddErrorFeedback: (msg) => dispatch(addErrorFeedback(msg)),
         dispatchResetFeedback: () => dispatch(resetFeedback()),
     };
 };

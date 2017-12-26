@@ -60,7 +60,8 @@ export const updatePost = (post) => {
     };
 };
 
-/** Will insert a post at the top of the current list. Fired after creating a post. */
+/** Will insert a post at the top of the current list. Fired after creating a post.
+ * Originally created for the reddit-style inline create control. Since the spec requires a separate Add Post view, we don't really need this ATM */
 export const insertPost = (post) => {
     return {
         type: INSERT_POST,

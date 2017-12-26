@@ -3,6 +3,12 @@
     margin: 0;
 }
 
+.category-details-add-post-link {
+    font-weight: bold;
+    margin-left: 5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
 .category-heading {
     padding: 0.3em;
     margin: 0.3em;

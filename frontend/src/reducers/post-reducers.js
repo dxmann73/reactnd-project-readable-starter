@@ -32,7 +32,7 @@ const postReducers = (state = {sortMethod: ORDER_BY_SCORE_HIGHEST_FIRST}, action
             return {
                 ...state,
                 [action.post.id]: action.post,
-                ids: [action.post.id, ...state.ids],
+                ids: [action.post.id, ...state.ids || []],
             };
         case REORDER_POSTS:
             const reorderedPostIds = state.ids
