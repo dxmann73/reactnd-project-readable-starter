@@ -1,14 +1,15 @@
 import React from 'react';
-import './PostAdd.css';
-import {createPost} from '../../actions/post-actions';
+import './PostCrud.css';
+import {createPost} from '../../../actions/post-actions';
 import {connect} from 'react-redux';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
-import {CategoryType} from '../../types/Typedefs';
-import {addErrorFeedback, addInfoFeedback, resetFeedback} from '../../actions/feedback-actions';
-import {defaultCategory} from '../../reducers/category-reducers';
+import {CategoryType} from '../../../types/Typedefs';
+import {addErrorFeedback, addInfoFeedback, resetFeedback} from '../../../actions/feedback-actions';
+import {defaultCategory} from '../../../reducers/category-reducers';
 
 class PostAdd extends React.Component {
+    authorInput;
     titleInput;
     categoryInput;
     bodyInput;
@@ -17,9 +18,9 @@ class PostAdd extends React.Component {
         const post = {
             id: shortid.generate(),
             timestamp: Date.now(),
+            author: this.authorInput.value,
             title: this.titleInput.value,
             body: this.bodyInput.value,
-            author: 'frontend',
             category: this.categoryInput.value,
         };
         if (!this.validate(post)) {
@@ -33,6 +34,10 @@ class PostAdd extends React.Component {
     validate = (post) => {
         this.props.dispatchResetFeedback();
         let valid = true;
+        if (!post.author) {
+            this.props.dispatchAddErrorFeedback('Please add an author');
+            valid = false;
+        }
         if (!post.title) {
             this.props.dispatchAddErrorFeedback('Please add a title');
             valid = false;
@@ -46,7 +51,7 @@ class PostAdd extends React.Component {
 
     resetForm = () => {
         this.props.dispatchResetFeedback();
-        this.titleInput.value = this.bodyInput.value = '';
+        this.authorInput.value = this.titleInput.value = this.bodyInput.value = '';
     };
 
     render() {
@@ -55,15 +60,16 @@ class PostAdd extends React.Component {
         return <div className="category-add">
             <h4 className="category-add-heading">Add a post:</h4>
             <div className="post-container">
-                <input id="postTitle" className="post-title" type="text" placeholder="Post title" ref={(val) => this.titleInput = val} />
+                <input className="post-author-add" type="text" placeholder="Author" ref={(val) => this.authorInput = val} />
+                <input className="post-title-add" type="text" placeholder="Post title" ref={(val) => this.titleInput = val} />
                 <span className="post-category-span"> in category </span>
-                <select id="postCategory" className="post-category"
+                <select className="post-category"
                         value={currentCategory.path || undefined}
                         readOnly={!!currentCategory.path} disabled={!!currentCategory.path}
                         ref={(val) => this.categoryInput = val}>
                     {categories && categories.map(c => <option key={c.path} value={c.path}>{c.name}</option>)}
                 </select>
-                <textarea id="postBody" className="post-add-body" rows="6" placeholder="Post content" ref={(val) => this.bodyInput = val} />
+                <textarea className="post-add-body" rows="6" placeholder="Post content" ref={(val) => this.bodyInput = val} />
             </div>
             <div className="post-add-controls">
                 <button type="button" title="Add post" onClick={() => this.addPost()}>Add post</button>
@@ -77,12 +83,13 @@ PostAdd.propTypes = {
     categories: PropTypes.arrayOf(CategoryType),
     currentCategory: CategoryType,
     dispatchCreatePost: PropTypes.func.isRequired,
+    dispatchAddInfoFeedback: PropTypes.func.isRequired,
     dispatchAddErrorFeedback: PropTypes.func.isRequired,
     dispatchResetFeedback: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
-    // console.log('Post::mapStateToProps', state, props);
+    // console.log('PostAdd::mapStateToProps', state, props);
     return {
         categories: state.categories.all.filter(c => !!c.path),// 'all' has no path and is not a valid category that users can post in
         currentCategory: state.categories.currentCategory || defaultCategory, // can be undefined when user bookmarks it

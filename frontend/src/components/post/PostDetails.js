@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 import {PostType} from '../../types/Typedefs';
 import PropTypes from 'prop-types';
-import './Post.css';
+import './PostDetails.css';
 import {downVote, fetchPost, upVote} from '../../actions/post-actions';
 import VoteControls from '../shared/VoteControls';
 import PostTitle from './subcomponents/PostTitle';
@@ -11,19 +12,23 @@ import PostSubtitle from './subcomponents/PostSubtitle';
 class PostDetails extends React.Component {
     render() {
         // console.log('Post::render', this.props);
-        const {post, categoryName, dispatchUpVote, dispatchDownVote} = this.props;
+        const {post, categoryName, dispatchUpVote, dispatchDownVote, dispatchRouteToEditPost} = this.props;
         if (!post) {
             return <h4>fetching post... </h4>;
         }
-        return <div className="post-main">
-            <h4 className="category-heading">Post details with comments:</h4>
+        return <div className="post-details-wrapper">
+            <h4 className="post-details-heading">Post details with comments:
+                <button type="button" className="post-details-edit-post-link"
+                        onClick={() => dispatchRouteToEditPost(post.id)}>Edit post
+                </button>
+            </h4>
             <VoteControls upVoteHandler={() => dispatchUpVote(post.id)} downVoteHandler={() => dispatchDownVote(post.id)} />
-            <div className="post-main">
+            <div className="post-details-main">
                 <PostTitle post={post} />
-                <PostSubtitle post={post} categoryName={categoryName} />
                 <div className="post-body">
                     {post.body}
                 </div>
+                <PostSubtitle post={post} categoryName={categoryName} />
                 <div className="post-comments">
                     <h5>comments here</h5>
                 </div>
@@ -47,6 +52,7 @@ PostDetails.propTypes = {
     dispatchUpVote: PropTypes.func.isRequired,
     dispatchDownVote: PropTypes.func.isRequired,
     dispatchFetchPost: PropTypes.func.isRequired,
+    dispatchRouteToEditPost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
@@ -65,6 +71,7 @@ const mapDispatchToProps = (dispatch) => {
         dispatchUpVote: (postId) => dispatch(upVote(postId)),
         dispatchDownVote: (postId) => dispatch(downVote(postId)),
         dispatchFetchPost: (postId) => dispatch(fetchPost(postId)),
+        dispatchRouteToEditPost: (postId) => dispatch(push(`/posts/edit/${postId}`)),
     };
 };
 

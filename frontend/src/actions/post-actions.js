@@ -43,6 +43,12 @@ export const createPost = (post) => (dispatch) => {
         .catch(noop);
 };
 
+export const editPost = (id, post) => (dispatch) => {
+    PostsAPI.editPost(id, post)
+        .then(data => dispatch(updatePost(data)))
+        .catch(noop);
+};
+
 /** Synchronous actions */
 /** Will replace all posts in the store. Fired when posts have been returned from the API call.*/
 export const initPosts = (posts) => {

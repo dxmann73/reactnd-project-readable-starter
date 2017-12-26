@@ -11,8 +11,9 @@ import {defaultCategory} from '../reducers/category-reducers';
 import PostDetails from './post/PostDetails';
 import {CategoryType} from '../types/Typedefs';
 import Feedback from './feedback/Feedback';
-import PostAdd from './post/PostAdd';
+import PostAdd from './post/crud/PostAdd';
 import CategoryHeader from './category/CategoryHeader';
+import PostEdit from './post/crud/PostEdit';
 
 class App extends React.Component {
     render() {
@@ -43,6 +44,12 @@ class App extends React.Component {
                         <div className="category-main">
                             <CategoryHeader />
                             <PostAdd />
+                        </div>
+                    } />
+                    <Route exact path="/posts/edit/:id" render={(props) =>
+                        <div className="category-main">
+                            <CategoryHeader />
+                            <PostEdit postId={props.match.params.id} />
                         </div>
                     } />
                 </div>

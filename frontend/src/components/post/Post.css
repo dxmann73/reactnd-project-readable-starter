@@ -6,15 +6,4 @@
 
 .post-permalink {
     color: blue;
-    /*
-     font-weight: bold;
-     */
-}
-
-.post-body {
-    margin: 0.5em;
-}
-
-.post-comments {
-    font-size: smaller;
 }

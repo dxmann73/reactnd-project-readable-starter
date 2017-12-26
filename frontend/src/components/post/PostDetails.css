@@ -1,0 +1,28 @@
+.post-details-wrapper {
+    margin-top: 0.25rem;
+}
+
+.post-details-edit-post-link {
+    font-weight: bold;
+    margin-left: 5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.post-details-heading {
+    padding: 0.3em;
+    margin: 0.3em;
+}
+
+.post-details-main {
+    display: inline-block;
+}
+
+.post-body {
+    padding: 0.3rem;
+    background-color: #bdbdbd;
+    border: 1px solid darkgrey;
+}
+
+.post-comments {
+    font-size: smaller;
+}
