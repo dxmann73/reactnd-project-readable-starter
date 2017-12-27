@@ -3,6 +3,7 @@ import * as PostsAPI from '../api/PostsAPI';
 
 export const INIT_POSTS = 'INIT_POSTS';
 export const INSERT_POST = 'INSERT_POST';
+export const REMOVE_POST = 'REMOVE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const REORDER_POSTS = 'REORDER_POSTS';
 
@@ -49,6 +50,12 @@ export const editPost = (id, post) => (dispatch) => {
         .catch(noop);
 };
 
+export const deletePost = (id) => (dispatch) => {
+    PostsAPI.deletePost(id)
+        .then(data => dispatch(removePost(id)))
+        .catch(noop);
+};
+
 /** Synchronous actions */
 /** Will replace all posts in the store. Fired when posts have been returned from the API call.*/
 export const initPosts = (posts) => {
@@ -72,6 +79,14 @@ export const insertPost = (post) => {
     return {
         type: INSERT_POST,
         post
+    };
+};
+
+/** Will remove a post from the state. Fired after post has been successfully deleted on the server. */
+export const removePost = (postId) => {
+    return {
+        type: REMOVE_POST,
+        postId
     };
 };
 
