@@ -8,7 +8,7 @@ export const getPosts = (categoryPath) => BaseAPI.doGet(categoryPath ? `${catego
 
 /**
  * `GET /posts/:id` | Get the details of a single post
- * @return a post in the form {id:num, timestamp:millis, title:string, body:string, author:string, category:string, voteScore:num, deleted:boolean, commentCount:num}
+ * @return a post in the form {id:string, timestamp:millis, title:string, body:string, author:string, category:string, voteScore:num, deleted:boolean, commentCount:num}
  */
 export const getPost = (id) => BaseAPI.doGet(`posts/${id}`);
 

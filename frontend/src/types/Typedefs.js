@@ -19,6 +19,18 @@ export const PostType = PropTypes.shape({
     }
 );
 
+export const CommentType = PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        parentId: PropTypes.string.isRequired,
+        timestamp: PropTypes.number.isRequired,
+        body: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        voteScore: PropTypes.number.isRequired,
+        deleted: PropTypes.bool.isRequired,
+        parentDeleted: PropTypes.bool.isRequired,
+    }
+);
+
 export const MessageType = PropTypes.shape({
         type: PropTypes.string.isRequired,
         message: PropTypes.string.isRequired,

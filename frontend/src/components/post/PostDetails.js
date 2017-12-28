@@ -8,6 +8,8 @@ import {deletePost, downVote, fetchPost, upVote} from '../../actions/post-action
 import VoteControls from '../shared/VoteControls';
 import PostTitle from './subcomponents/PostTitle';
 import PostSubtitle from './subcomponents/PostSubtitle';
+import {fetchComments} from '../../actions/comment-actions';
+import Comment from '../comment/Comment';
 
 class PostDetails extends React.Component {
 
@@ -25,19 +27,15 @@ class PostDetails extends React.Component {
     }
 
     render() {
-        // console.log('Post::render', this.props);
-        const {post, categoryName, dispatchUpVote, dispatchDownVote, dispatchRouteToEditPost} = this.props;
+        // console.log('PostDetails::render', this.props);
+        const {post, comments, categoryName, dispatchUpVote, dispatchDownVote, dispatchRouteToEditPost} = this.props;
         if (!post) {
             return <h4>fetching post... </h4>;
         }
         if (this.state.deleteConfirmationShowing) {
             return <h4 className="post-details-heading">Are you sure you want to delete the post?
-                <button type="button" className="post-details-button"
-                        onClick={() => this.deletePost(post)}>Yes
-                </button>
-                <button type="button" className="post-details-button"
-                        onClick={() => this.showDeleteConfirmation(false)}>No
-                </button>
+                <button type="button" className="post-details-button" onClick={() => this.deletePost(post)}>Yes</button>
+                <button type="button" className="post-details-button" onClick={() => this.showDeleteConfirmation(false)}>No</button>
             </h4>;
         }
         return <div className="post-details-wrapper">
@@ -57,7 +55,7 @@ class PostDetails extends React.Component {
                 </div>
                 <PostSubtitle post={post} categoryName={categoryName} />
                 <div className="post-comments">
-                    <h5>comments here</h5>
+                    {comments && comments.map(id => <Comment key={id} commentId={id} />)}
                 </div>
             </div>
         </div>;
@@ -70,9 +68,10 @@ class PostDetails extends React.Component {
 
     /** when the component is mounted, and the post is not yet in the state, this means we come from a bookmark or F5 */
     componentWillMount() {
-        // console.log('Post::componentWillMount', this.props);
+        // console.log('PostDetails::componentWillMount', this.props);
         if (!this.props.post) {
             this.props.dispatchFetchPost(this.props.postId);
+            this.props.dispatchFetchComments(this.props.postId);
         }
     }
 }
@@ -80,10 +79,12 @@ class PostDetails extends React.Component {
 PostDetails.propTypes = {
     post: PostType,
     postId: PropTypes.string.isRequired,
+    comments: PropTypes.arrayOf(PropTypes.string),
     categoryName: PropTypes.string.isRequired,
     dispatchUpVote: PropTypes.func.isRequired,
     dispatchDownVote: PropTypes.func.isRequired,
     dispatchFetchPost: PropTypes.func.isRequired,
+    dispatchFetchComments: PropTypes.func.isRequired,
     dispatchRouteToEditPost: PropTypes.func.isRequired,
     dispatchRouteToCategoryView: PropTypes.func.isRequired,
     dispatchDeletePost: PropTypes.func.isRequired,
@@ -96,6 +97,7 @@ const mapStateToProps = (state, props) => {
     return {
         post,
         postId: props.postId,
+        comments: state.comments.ids,
         categoryName,
     };
 };
@@ -105,6 +107,7 @@ const mapDispatchToProps = (dispatch) => {
         dispatchUpVote: (postId) => dispatch(upVote(postId)),
         dispatchDownVote: (postId) => dispatch(downVote(postId)),
         dispatchFetchPost: (postId) => dispatch(fetchPost(postId)),
+        dispatchFetchComments: (postId) => dispatch(fetchComments(postId)),
         dispatchRouteToEditPost: (postId) => dispatch(push(`/posts/edit/${postId}`)),
         dispatchRouteToCategoryView: (post) => dispatch(push(`/${post.category}`)),
         dispatchDeletePost: (postId) => dispatch(deletePost(postId)),

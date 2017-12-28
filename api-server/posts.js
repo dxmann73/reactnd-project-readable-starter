@@ -14,8 +14,8 @@ const defaultData = {
         deleted: true,
         commentCount: 0
     },
-    '8xf0y6ziyjabvozdd253n1': {
-        id: '8xf0y6ziyjabvozdd253n1',
+    '8xf0y6ziyjabvozdd253n2': {
+        id: '8xf0y6ziyjabvozdd253n2',
         timestamp: 1512268272634,
         title: 'Udacity is the best place to learn React, post v2.0',
         body: 'Everyone says so after all.',
