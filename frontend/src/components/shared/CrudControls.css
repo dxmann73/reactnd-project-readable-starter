@@ -1,0 +1,15 @@
+.crud-wrapper {
+    display: inline-block;
+    margin-top: 0.25rem;
+    float: right;
+}
+
+.crud-heading {
+    margin: 0.3em;
+}
+
+.crud-button {
+    font-weight: bold;
+    margin-left: 0.5rem;
+    padding: 0.25rem 1rem 0.25rem 1rem;
+}

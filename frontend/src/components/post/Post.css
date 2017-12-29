@@ -1,7 +1,9 @@
 .post-main {
-    margin-top: 0.25rem;
     display: inline-block;
-    width: 95%;
+}
+
+.post-inline {
+    display: inline-block;
 }
 
 .post-permalink {

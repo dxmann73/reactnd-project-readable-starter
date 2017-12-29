@@ -18,6 +18,8 @@
 }
 
 .post-body {
+    clear: both;
+    width: 60rem;
     padding: 0.3rem;
     background-color: #bdbdbd;
     border: 1px solid darkgrey;

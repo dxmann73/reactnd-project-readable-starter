@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import {CategoryType} from '../../../types/Typedefs';
 import {addErrorFeedback, addInfoFeedback, resetFeedback} from '../../../actions/feedback-actions';
 import {defaultCategory} from '../../../reducers/category-reducers';
+import {goBack} from 'react-router-redux';
 
 class PostAdd extends React.Component {
     authorInput;
@@ -56,7 +57,7 @@ class PostAdd extends React.Component {
 
     render() {
         // console.log('PostAdd::render', this.props, this.state);
-        const {categories, currentCategory} = this.props;
+        const {categories, currentCategory, dispatchGoBack} = this.props;
         return <div className="category-add">
             <h4 className="category-add-heading">Add a post:</h4>
             <div className="post-container">
@@ -74,6 +75,7 @@ class PostAdd extends React.Component {
             <div className="post-add-controls">
                 <button type="button" title="Add post" onClick={() => this.addPost()}>Add post</button>
                 <button type="button" title="Reset" onClick={() => this.resetForm()}>Reset</button>
+                <button type="button" title="Cancel" onClick={dispatchGoBack}>Cancel</button>
             </div>
         </div>;
     }
@@ -86,6 +88,7 @@ PostAdd.propTypes = {
     dispatchAddInfoFeedback: PropTypes.func.isRequired,
     dispatchAddErrorFeedback: PropTypes.func.isRequired,
     dispatchResetFeedback: PropTypes.func.isRequired,
+    dispatchGoBack: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
@@ -102,6 +105,7 @@ const mapDispatchToProps = (dispatch) => {
         dispatchAddInfoFeedback: (msg) => dispatch(addInfoFeedback(msg)),
         dispatchAddErrorFeedback: (msg) => dispatch(addErrorFeedback(msg)),
         dispatchResetFeedback: () => dispatch(resetFeedback()),
+        dispatchGoBack: () => dispatch(goBack()),
     };
 };
 

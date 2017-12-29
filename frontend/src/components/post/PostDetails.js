@@ -10,21 +10,10 @@ import PostTitle from './subcomponents/PostTitle';
 import PostSubtitle from './subcomponents/PostSubtitle';
 import {fetchComments} from '../../actions/comment-actions';
 import Comment from '../comment/Comment';
+import CrudControls from '../shared/CrudControls';
 
+/** Possible to merge with Post.js, now that we have CRUD in the main view as well. */
 class PostDetails extends React.Component {
-
-    constructor() {
-        super();
-        this.state = {
-            deleteConfirmationShowing: false,
-        };
-    }
-
-    showDeleteConfirmation(show) {
-        this.setState({
-            deleteConfirmationShowing: show,
-        });
-    }
 
     render() {
         // console.log('PostDetails::render', this.props);
@@ -32,24 +21,13 @@ class PostDetails extends React.Component {
         if (!post) {
             return <h4>fetching post... </h4>;
         }
-        if (this.state.deleteConfirmationShowing) {
-            return <h4 className="post-details-heading">Are you sure you want to delete the post?
-                <button type="button" className="post-details-button" onClick={() => this.deletePost(post)}>Yes</button>
-                <button type="button" className="post-details-button" onClick={() => this.showDeleteConfirmation(false)}>No</button>
-            </h4>;
-        }
         return <div className="post-details-wrapper">
-            <h4 className="post-details-heading">Post details with comments:
-                <button type="button" className="post-details-button"
-                        onClick={() => dispatchRouteToEditPost(post.id)}>Edit post
-                </button>
-                <button type="button" className="post-details-button"
-                        onClick={() => this.showDeleteConfirmation(true)}>Delete post
-                </button>
-            </h4>
+            <h4 className="post-details-heading">Post details with comments:</h4>
             <VoteControls upVoteHandler={() => dispatchUpVote(post.id)} downVoteHandler={() => dispatchDownVote(post.id)} />
             <div className="post-details-main">
                 <PostTitle post={post} />
+                <CrudControls deleteHandler={() => this.deletePost(post)}
+                              editHandler={() => dispatchRouteToEditPost(post.id)} />
                 <div className="post-body">
                     {post.body}
                 </div>
@@ -91,7 +69,7 @@ PostDetails.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-    // console.log('Post::mapStateToProps', state, props);
+    // console.log('PostDetails::mapStateToProps', state, props);
     const post = state.posts[props.postId];
     const categoryName = (post && state.categories.byPath && state.categories.byPath[post.category].name) || 'fetching...';
     return {

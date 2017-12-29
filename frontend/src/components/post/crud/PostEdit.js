@@ -2,7 +2,7 @@ import React from 'react';
 import './PostCrud.css';
 import {editPost, fetchPost} from '../../../actions/post-actions';
 import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
+import {goBack} from 'react-router-redux';
 import PropTypes from 'prop-types';
 import {PostType} from '../../../types/Typedefs';
 import {addErrorFeedback, addInfoFeedback, resetFeedback} from '../../../actions/feedback-actions';
@@ -21,7 +21,7 @@ class PostEdit extends React.Component {
         }
         this.props.dispatchEditPost(this.props.post.id, patchedPost);
         this.props.dispatchAddInfoFeedback('Success! Your post has been saved!');// TODO but this would fail if backend is gone
-        this.props.dispatchRouteToPostDetails(this.props.post);
+        this.props.dispatchGoBack();
     };
 
     validate = (post) => {
@@ -38,13 +38,9 @@ class PostEdit extends React.Component {
         return valid;
     };
 
-    cancel = () => {
-        this.props.dispatchRouteToPostDetails(this.props.post);
-    };
-
     render() {
         // console.log('PostEdit::render', this.props, this.state);
-        const {post} = this.props;
+        const {post, dispatchGoBack} = this.props;
         if (!post) {
             return <h4>fetching post... </h4>;
         }
@@ -56,7 +52,7 @@ class PostEdit extends React.Component {
             </div>
             <div className="post-add-controls">
                 <button type="button" title="Save post" onClick={() => this.editPost()}>Save post</button>
-                <button type="button" title="Cancel" onClick={() => this.cancel()}>Cancel</button>
+                <button type="button" title="Cancel" onClick={dispatchGoBack}>Cancel</button>
             </div>
         </div>;
     }
@@ -78,7 +74,7 @@ PostEdit.propTypes = {
     dispatchAddInfoFeedback: PropTypes.func.isRequired,
     dispatchAddErrorFeedback: PropTypes.func.isRequired,
     dispatchResetFeedback: PropTypes.func.isRequired,
-    dispatchRouteToPostDetails: PropTypes.func.isRequired,
+    dispatchGoBack: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
@@ -96,7 +92,7 @@ const mapDispatchToProps = (dispatch) => {
         dispatchAddInfoFeedback: (msg) => dispatch(addInfoFeedback(msg)),
         dispatchAddErrorFeedback: (msg) => dispatch(addErrorFeedback(msg)),
         dispatchResetFeedback: () => dispatch(resetFeedback()),
-        dispatchRouteToPostDetails: (post) => dispatch(push(`/post-details/${post.id}`)),
+        dispatchGoBack: () => dispatch(goBack()),
     };
 };
 
