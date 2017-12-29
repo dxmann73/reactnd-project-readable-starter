@@ -15,7 +15,7 @@ class Subtitle extends React.Component {
             <span className="subtitle-author">{author}</span>
             {category && <span> in </span>}
             {category && <Link to={`/${category.path}`}>{category.name}</Link>}
-            {(commentCount !== 0) && <span> | {commentCount} comments </span>}
+            {(commentCount !== undefined && commentCount !== 0) && <span> | {commentCount} comments </span>}
         </div>;
     }
 }
