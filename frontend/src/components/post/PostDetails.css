@@ -19,6 +19,7 @@
 
 .post-body {
     clear: both;
+    margin-top: 0.5rem;
     width: 62rem;
     padding: 0.3rem;
     background-color: #bdbdbd;
