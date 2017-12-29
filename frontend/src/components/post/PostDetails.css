@@ -24,6 +24,8 @@
     padding: 0.3rem;
     background-color: #bdbdbd;
     border: 1px solid darkgrey;
+    font-family: sans-serif;
+    font-size: 90%;
 }
 
 .post-comments {

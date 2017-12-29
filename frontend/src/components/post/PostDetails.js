@@ -33,9 +33,9 @@ class PostDetails extends React.Component {
                 <PostTitle post={post} />
                 <CrudControls deleteHandler={() => this.deletePost(post)}
                               editHandler={() => dispatchRouteToEditPost(post.id)} />
-                <div className="post-body">
+                <pre className="post-body">
                     {post.body}
-                </div>
+                </pre>
                 <Subtitle item={post} category={{path: post.category, name: categoryName}} />
                 <div className="post-comments">
                     <CommentAdd postId={post.id} />

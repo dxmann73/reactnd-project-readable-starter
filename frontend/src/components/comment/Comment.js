@@ -57,7 +57,7 @@ class Comment extends React.Component {
             <div className="comment-body">
                 {this.state.isEditing
                     ? <textarea rows="3" placeholder="Comment" ref={(val) => this.bodyInput = val} defaultValue={comment.body} />
-                    : <span>{comment.body}</span>
+                    : <pre>{comment.body}</pre>
                 }
             </div>
             <Subtitle item={comment} />
