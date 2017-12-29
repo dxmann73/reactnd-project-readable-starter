@@ -30,6 +30,7 @@ class PostAdd extends React.Component {
         this.props.dispatchCreatePost(post);
         this.resetForm();
         this.props.dispatchAddInfoFeedback('Success! Your post has been created!');
+        this.props.dispatchGoBack();
     };
 
     validate = (post) => {

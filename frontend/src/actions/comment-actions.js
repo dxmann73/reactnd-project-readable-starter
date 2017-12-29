@@ -1,5 +1,6 @@
 import {noop} from '../actions/feedback-actions';
 import * as CommentsAPI from '../api/CommentsAPI';
+import {commentAdded, commentRemoved} from './post-actions';
 
 export const INIT_COMMENTS = 'INIT_COMMENTS';
 export const RESET_COMMENTS = 'RESET_COMMENTS';
@@ -34,7 +35,10 @@ export const downVote = (commentId) => (dispatch) => {
 
 export const createComment = (comment) => (dispatch) => {
     CommentsAPI.createComment(comment)
-        .then(data => dispatch(insertComment(data)))
+        .then(data => {
+            dispatch(insertComment(data));
+            dispatch(commentAdded(data.parentId));
+        })
         .catch(noop);
 };
 
@@ -46,7 +50,10 @@ export const editComment = (id, comment) => (dispatch) => {
 
 export const deleteComment = (id) => (dispatch) => {
     CommentsAPI.deleteComment(id)
-        .then(data => dispatch(removeComment(id)))
+        .then(data => {
+            dispatch(removeComment(id));
+            dispatch(commentRemoved(data.parentId));
+        })
         .catch(noop);
 };
 

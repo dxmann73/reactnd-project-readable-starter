@@ -72,7 +72,7 @@ export const doDelete = (path) =>
             method: 'DELETE',
             headers,
         })
-        .then(throwIfStatusNotOk)
+        .then(extractJson)
         .catch(handleAndRethrowError);
 
 /**

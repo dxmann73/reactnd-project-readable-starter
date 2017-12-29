@@ -6,6 +6,7 @@ import {
     ORDER_NEWEST_FIRST,
     REMOVE_POST,
     REORDER_POSTS,
+    UPDATE_COMMENT_COUNT,
     UPDATE_POST
 } from '../actions/post-actions';
 
@@ -50,6 +51,14 @@ const postReducers = (state = {sortMethod: ORDER_BY_SCORE_HIGHEST_FIRST}, action
                 ...state,
                 sortMethod: action.sortMethod,
                 ids: reorderedPostIds,
+            };
+        case UPDATE_COMMENT_COUNT:// change the comment count on the fly, without reloading the post
+            return {
+                ...state,
+                [action.postId]: {
+                    ...state[action.postId],
+                    commentCount: state[action.postId].commentCount + action.amount
+                },
             };
         default:
             return state;

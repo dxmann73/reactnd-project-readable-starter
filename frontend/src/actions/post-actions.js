@@ -6,6 +6,7 @@ export const INSERT_POST = 'INSERT_POST';
 export const REMOVE_POST = 'REMOVE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const REORDER_POSTS = 'REORDER_POSTS';
+export const UPDATE_COMMENT_COUNT = 'UPDATE_COMMENT_COUNT';
 
 export const ORDER_NEWEST_FIRST = 'ORDER_NEWEST_FIRST';
 export const ORDER_BY_SCORE_LOWEST_FIRST = 'ORDER_BY_SCORE_LOWEST_FIRST';
@@ -97,4 +98,15 @@ export const reorderPosts = (sortMethod) => {
         type: REORDER_POSTS,
         sortMethod,
     };
+};
+
+/** Change the comment count of the post without fetching it from the server again */
+export const commentRemoved = (postId) => updateCommentCount(postId, -1);
+export const commentAdded = (postId) => updateCommentCount(postId, 1);
+export const updateCommentCount = (postId, amount) => {
+    return {
+        type: UPDATE_COMMENT_COUNT,
+        postId,
+        amount,
+    }
 };
