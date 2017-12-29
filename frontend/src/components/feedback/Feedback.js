@@ -7,7 +7,6 @@ import {FEEDBACKTYPE_ERROR, resetFeedback} from '../../actions/feedback-actions'
 
 class Feedback extends React.Component {
     render() {
-        // console.log('Feedback::render', this.props);
         const {messages, dispatchResetFeedback} = this.props;
         return <div className="feedback-main">
             {messages && !!messages.length && <div className="feedback-list-container">
@@ -27,15 +26,13 @@ Feedback.propTypes = {
     dispatchResetFeedback: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, props) => {
-    // console.log('Feedback::mapStateToProps', state, props);
+const mapStateToProps = (state) => {
     return {
         messages: state.feedback.messages,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    // console.log('Feedback::mapDispatchToProps', dispatch, props);
     return {
         dispatchResetFeedback: () => dispatch(resetFeedback())
     };

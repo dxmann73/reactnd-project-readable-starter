@@ -13,14 +13,18 @@ import Comment from '../comment/Comment';
 import CrudControls from '../shared/CrudControls';
 import CommentAdd from '../comment/CommentAdd';
 
-/** Possible to merge with Post.js, now that we have CRUD in the main view as well. Still, there are many subtle differences */
+/** Possible to merge with Post.js, but there are many subtle differences */
 class PostDetails extends React.Component {
 
+    deletePost = (post) => {
+        this.props.dispatchDeletePost(post.id);
+        this.props.dispatchRouteToCategoryView(post);
+    };
+
     render() {
-        // console.log('PostDetails::render', this.props);
         const {post, comments, categoryName, dispatchUpVote, dispatchDownVote, dispatchRouteToEditPost} = this.props;
         if (!post) {
-            return <h4>fetching post... </h4>;
+            return <h4>fetching post... TODO make deleted posts inaccessible</h4>;
         }
         return <div className="post-details-wrapper">
             <h4 className="post-details-heading">Post details with comments:</h4>
@@ -41,15 +45,9 @@ class PostDetails extends React.Component {
         </div>;
     }
 
-    deletePost = (post) => {
-        this.props.dispatchDeletePost(post.id);
-        this.props.dispatchRouteToCategoryView(post);
-    };
-
-    /** when the component is mounted, and the post is not yet in the state, this means we come from a bookmark or F5 */
     componentWillMount() {
-        // console.log('PostDetails::componentWillMount', this.props);
         if (!this.props.post) {
+            // support F5 and bookmarked post URLs
             this.props.dispatchFetchPost(this.props.postId);
             this.props.dispatchFetchComments(this.props.postId);
         }
@@ -71,8 +69,8 @@ PostDetails.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-    // console.log('PostDetails::mapStateToProps', state, props);
     const post = state.posts[props.postId];
+    // the following is to make sure both categories and post have been fetched TODO categories should always be there when we come here
     const categoryName = (post && state.categories.byPath && state.categories.byPath[post.category].name) || 'fetching...';
     return {
         post,

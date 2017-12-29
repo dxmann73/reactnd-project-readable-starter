@@ -5,7 +5,7 @@ export const defaultCategory = {name: 'all', path: null};
 const categoryReducers = (state = {}, action) => {
     switch (action.type) {
         case INIT_CATEGORIES:// when categories have been fetched
-            action.data.categories.unshift(defaultCategory);
+            action.data.categories.unshift(defaultCategory);// 'all' comes first
             return {
                 ...state,
                 all: action.data.categories,

@@ -16,6 +16,7 @@ import reducers from './reducers';
 const history = createHistory();
 const reduxRouterMiddleware = routerMiddleware(history);
 
+// enable redux devtools chrome extension
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(

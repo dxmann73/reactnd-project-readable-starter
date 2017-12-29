@@ -10,13 +10,12 @@ import {
 } from '../actions/post-actions';
 
 const postReducers = (state = {sortMethod: ORDER_BY_SCORE_HIGHEST_FIRST}, action) => {
-    // console.log('postReducers', state, action);
     switch (action.type) {
         case INIT_POSTS:// when posts have been fetched
             const posts = action.posts
                 .filter(post => !post.deleted)// disregard deleted posts
                 .sort(withCompareFn(state.sortMethod));// default sort based on currently selected method
-            // flatten all posts into the state with their ID as a key, so we can update them directly
+            // flatten all posts into the state with their ID as a key, so we can update them directly later on
             const initState = posts.reduce((state, post) => {
                 state[post.id] = post;
                 return state;
@@ -29,13 +28,13 @@ const postReducers = (state = {sortMethod: ORDER_BY_SCORE_HIGHEST_FIRST}, action
                 ...state,
                 [action.post.id]: action.post,
             };
-        case INSERT_POST:
+        case INSERT_POST:// insert post at the top of the list
             return {
                 ...state,
                 [action.post.id]: action.post,
                 ids: [action.post.id, ...state.ids || []],
             };
-        case REMOVE_POST:
+        case REMOVE_POST:// remove post from state and ID list; ID list is set to undefined when we delete the last post
             const stateAfterRemove = {
                 ...state,
                 ids: state.ids ? state.ids.filter(id => id !== action.postId) : undefined

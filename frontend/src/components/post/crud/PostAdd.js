@@ -56,7 +56,6 @@ class PostAdd extends React.Component {
     };
 
     render() {
-        // console.log('PostAdd::render', this.props, this.state);
         const {categories, currentCategory, dispatchGoBack} = this.props;
         return <div className="category-add">
             <h4 className="category-add-heading">Add a post:</h4>
@@ -73,8 +72,8 @@ class PostAdd extends React.Component {
                 <textarea className="post-add-body" rows="6" placeholder="Post content" ref={(val) => this.bodyInput = val} />
             </div>
             <div className="post-add-controls">
-                <button type="button" title="Add post" onClick={() => this.addPost()}>Add post</button>
-                <button type="button" title="Reset" onClick={() => this.resetForm()}>Reset</button>
+                <button type="button" title="Add post" onClick={this.addPost}>Add post</button>
+                <button type="button" title="Reset" onClick={this.resetForm}>Reset</button>
                 <button type="button" title="Cancel" onClick={dispatchGoBack}>Cancel</button>
             </div>
         </div>;
@@ -91,8 +90,7 @@ PostAdd.propTypes = {
     dispatchGoBack: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, props) => {
-    // console.log('PostAdd::mapStateToProps', state, props);
+const mapStateToProps = (state) => {
     return {
         categories: state.categories.all.filter(c => !!c.path),// 'all' has no path and is not a valid category that users can post in
         currentCategory: state.categories.currentCategory || defaultCategory, // can be undefined when user bookmarks it

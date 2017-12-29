@@ -20,7 +20,7 @@ class PostEdit extends React.Component {
             return;
         }
         this.props.dispatchEditPost(this.props.post.id, patchedPost);
-        this.props.dispatchAddInfoFeedback('Success! Your post has been saved!');// TODO but this would fail if backend is gone
+        this.props.dispatchAddInfoFeedback('Success! Your post has been saved!');
         this.props.dispatchGoBack();
     };
 
@@ -39,10 +39,9 @@ class PostEdit extends React.Component {
     };
 
     render() {
-        // console.log('PostEdit::render', this.props, this.state);
         const {post, dispatchGoBack} = this.props;
         if (!post) {
-            return <h4>fetching post... </h4>;
+            return <h4>fetching post... TODO make deleted posts inaccessible</h4>;
         }
         return <div className="category-add">
             <h4 className="category-add-heading">Edit post:</h4>
@@ -57,11 +56,9 @@ class PostEdit extends React.Component {
         </div>;
     }
 
-    /** when the component is mounted, and the post is not yet in the state, this means we come from a bookmark or F5 */
     componentWillMount() {
-        // console.log('PostEdit::componentWillMount', this.props);
         if (!this.props.post) {
-            this.props.dispatchFetchPost(this.props.postId);
+            this.props.dispatchFetchPost(this.props.postId);// support F5 and bookmarked post URLs
         }
     }
 }
@@ -78,7 +75,6 @@ PostEdit.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-    // console.log('PostEdit::mapStateToProps', state, props);
     return {
         postId: props.postId,
         post: state.posts[props.postId],

@@ -13,7 +13,6 @@ import CrudControls from '../shared/CrudControls';
 
 class Post extends React.Component {
     render() {
-        // console.log('Post::render', this.props);
         const {post, categoryName, dispatchUpVote, dispatchDownVote, dispatchRouteToEditPost, dispatchDeletePost} = this.props;
         return <div className="post-main">
             <VoteControls upVoteHandler={() => dispatchUpVote(post.id)} downVoteHandler={() => dispatchDownVote(post.id)} />
@@ -24,7 +23,7 @@ class Post extends React.Component {
                 <Subtitle item={post} category={{path: post.category, name: categoryName}} />
                 <div className="post-comments">
                     <Link className="post-permalink" to={`/post-details/${post.id}`}>
-                        {post.commentCount ? `see all ${post.commentCount} comments` : `be the first to add a comment`}
+                        {post.commentCount ? `See all ${post.commentCount} comments` : `Be the first to add a comment`}
                     </Link>
                 </div>
             </div>
@@ -42,8 +41,8 @@ Post.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-    // console.log('Post::mapStateToProps', state, props);
     const post = state.posts[props.postId];
+    // the following is to make sure that categories have been fetched TODO categories should always be there when we come here
     const categoryName = (state.categories.byPath && state.categories.byPath[post.category].name) || 'fetching...';
     return {
         post,

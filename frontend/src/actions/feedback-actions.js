@@ -4,6 +4,8 @@ export const ADD_FEEDBACK = 'ADD_FEEDBACK';
 export const FEEDBACKTYPE_ERROR = 'FEEDBACKTYPE_ERROR';
 export const FEEDBACKTYPE_INFO = 'FEEDBACKTYPE_INFO';
 
+/** Actions for the centralized feedback component */
+
 export const resetFeedback = () => ({
     type: RESET_FEEDBACK
 });

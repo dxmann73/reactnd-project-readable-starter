@@ -4,11 +4,10 @@
  * - to provide some centralized error handling
  *
  * About using fetch see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
- *
  */
 
 /**
- * apiRoot is where our API server lives. At the root, it has some kind of WSDL, which is nice. :-)
+ * apiRoot is where our API server lives. At this root, the server provides some kind of WSDL.
  * Refer to the README.md in the api-server folder for a complete overview.
  */
 const apiRoot = 'http://localhost:3001';

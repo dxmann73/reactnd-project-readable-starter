@@ -7,13 +7,13 @@ class CrudControls extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            deleteConfirmationShowing: false,
+            deleteConfirmationShowing: false
         };
     }
 
     showDeleteConfirmation(show) {
         this.setState({
-            deleteConfirmationShowing: show,
+            deleteConfirmationShowing: show
         });
     }
 

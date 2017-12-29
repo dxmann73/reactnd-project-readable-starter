@@ -8,33 +8,27 @@ import PropTypes from 'prop-types';
 class CategoryView extends React.Component {
 
     render() {
-        // console.log('CategoryView::render', this.props);
         return <div className="category-main">
             <CategoryHeader showSort={true} />
             <CategoryDetails />
         </div>;
     }
 
-    /** called when we mount the first time (F5 or bookmark), or the route changes from another component */
     componentWillMount() {
-        // console.log('CategoryView::componentWillMount', this.props);
-        this.props.dispatchChangeToCategory(this.props.categoryPath);
+        this.props.dispatchChangeToCategory(this.props.categoryPath);// support F5 and bookmarked post URLs
     }
 
-    /** called when the route changes for the same component */
     componentWillReceiveProps(props) {
-        // console.log('CategoryView::componentWillReceiveProps', props);
-        this.props.dispatchChangeToCategory(props.categoryPath);
+        this.props.dispatchChangeToCategory(props.categoryPath);// on route changes within the same component
     }
 }
 
 CategoryView.propTypes = {
     categoryPath: PropTypes.string,// can be null for the "all" category
-    dispatchChangeToCategory: PropTypes.func.isRequired
+    dispatchChangeToCategory: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => {
-    // console.log('CategoryView::mapStateToProps', state, props);
     return {
         categoryPath: props.categoryPath,
     };

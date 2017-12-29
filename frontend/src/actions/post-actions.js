@@ -11,8 +11,8 @@ export const ORDER_NEWEST_FIRST = 'ORDER_NEWEST_FIRST';
 export const ORDER_BY_SCORE_LOWEST_FIRST = 'ORDER_BY_SCORE_LOWEST_FIRST';
 export const ORDER_BY_SCORE_HIGHEST_FIRST = 'ORDER_BY_SCORE_HIGHEST_FIRST';
 
-/** Thunk / async actions:
- * They return a function which takes dispatch as an argument and dispatches the action on promise resolve
+/**
+ * Thunk / async actions: Action is dispatched after the promise resolves
  */
 export const fetchPosts = (categoryPath) => (dispatch) => {
     PostsAPI.getPosts(categoryPath)

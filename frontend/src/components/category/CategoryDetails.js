@@ -8,7 +8,6 @@ import Post from '../post/Post';
 
 class CategoryDetails extends React.Component {
     render() {
-        // console.log('CategoryDetails::render', this.props);
         const {category, postIds, dispatchRouteToAddPost} = this.props;
         return <div className="category-details">
             <h4 className="category-heading">Posts for category '{category.name}':
@@ -31,8 +30,7 @@ CategoryDetails.propTypes = {
     dispatchRouteToAddPost: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, props) => {
-    // console.log('CategoryDetails::mapStateToProps', state, props);
+const mapStateToProps = (state) => {
     return {
         category: state.categories.currentCategory,
         postIds: state.posts.ids,

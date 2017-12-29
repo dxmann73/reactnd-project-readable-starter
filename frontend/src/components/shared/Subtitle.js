@@ -22,7 +22,7 @@ class Subtitle extends React.Component {
 
 Subtitle.propTypes = {
     item: PropTypes.oneOfType([PostType, CommentType]).isRequired,
-    category: CategoryType,
+    category: CategoryType,// can be empty, e.g. for comments
 };
 
 export default Subtitle;

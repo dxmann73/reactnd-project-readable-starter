@@ -6,8 +6,7 @@ export const INSERT_COMMENT = 'INSERT_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 
-/** Thunk / async actions:
- */
+/** Thunk / async actions */
 export const fetchComments = (postId) => (dispatch) => {
     CommentsAPI.getComments(postId)
         .then(data => dispatch(initComments(data)))
@@ -67,8 +66,7 @@ export const updateComment = (comment) => {
     };
 };
 
-/** Will insert a comment at the top of the current list. Fired after creating a comment.
- * Originally created for the reddit-style inline create control. Since the spec requires a separate Add Comment view, we don't really need this ATM */
+/** Will insert a comment at the top of the current list. Fired after creating a comment. */
 export const insertComment = (comment) => {
     return {
         type: INSERT_COMMENT,

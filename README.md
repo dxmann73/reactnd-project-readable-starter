@@ -29,7 +29,7 @@ To get started:
 * Install and start the API server
     - `cd api-server`
     - `npm install`
-    - `node server`
+    - `npm start`
 * In another terminal window, install and start the app
     - `cd frontend`
     - `npm install`

@@ -9,12 +9,10 @@ import {defaultCategory} from '../../reducers/category-reducers';
 
 class CategoryHeader extends React.Component {
     sort = (sortMethod) => {
-        // console.log('CategoryHeader::sort', sortMethod.target.value);
         this.props.dispatchReorderPosts(sortMethod.target.value);
     };
 
     render() {
-        // console.log('CategoryHeader::render', this.props);
         const {currentCategory, categories, showSort} = this.props;
         return <div className="category-header">
             <div className="category-teaser">Categories:&nbsp;</div>
@@ -45,7 +43,6 @@ CategoryHeader.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-    // console.log('CategoryHeader::mapStateToProps', state, props);
     return {
         showSort: props.showSort,
         categories: state.categories.all,
@@ -55,7 +52,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchReorderPosts: (sortMethod) => dispatch(reorderPosts(sortMethod))
+        dispatchReorderPosts: (sortMethod) => dispatch(reorderPosts(sortMethod)),
     };
 };
 

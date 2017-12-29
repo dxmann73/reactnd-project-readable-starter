@@ -12,13 +12,6 @@ import Subtitle from '../shared/Subtitle';
 class Comment extends React.Component {
     bodyInput;
 
-    constructor() {
-        super();
-        this.state = {
-            isEditing: false
-        };
-    }
-
     toggleEditMode = () => this.setState((prev) => ({
         isEditing: !prev.isEditing
     }));
@@ -44,8 +37,14 @@ class Comment extends React.Component {
         return valid;
     };
 
+    constructor() {
+        super();
+        this.state = {
+            isEditing: false
+        };
+    }
+
     render() {
-        // console.log('Comment::render', this.props);
         const {comment, dispatchUpVote, dispatchDownVote, dispatchDeleteComment} = this.props;
         return <div className="comment-main comment-panel">
             <VoteControls upVoteHandler={() => dispatchUpVote(comment.id)} downVoteHandler={() => dispatchDownVote(comment.id)} />
@@ -53,7 +52,7 @@ class Comment extends React.Component {
                 deleteHandler={() => dispatchDeleteComment(comment.id)}
                 editHandler={this.toggleEditMode}
                 cancelHandler={this.toggleEditMode}
-                saveHandler={() => this.saveComment()}
+                saveHandler={this.saveComment}
                 isEditing={this.state.isEditing} />
             <div className="comment-body">
                 {this.state.isEditing
@@ -77,7 +76,6 @@ Comment.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-    // console.log('Comment::mapStateToProps', state, props);
     return {
         comment: state.comments[props.commentId],
     };
