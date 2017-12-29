@@ -7,13 +7,13 @@ import './PostDetails.css';
 import {deletePost, downVote, fetchPost, upVote} from '../../actions/post-actions';
 import VoteControls from '../shared/VoteControls';
 import PostTitle from './subcomponents/PostTitle';
-import PostSubtitle from './subcomponents/PostSubtitle';
+import Subtitle from '../shared/Subtitle';
 import {fetchComments} from '../../actions/comment-actions';
 import Comment from '../comment/Comment';
 import CrudControls from '../shared/CrudControls';
 import CommentAdd from '../comment/CommentAdd';
 
-/** Possible to merge with Post.js, now that we have CRUD in the main view as well. */
+/** Possible to merge with Post.js, now that we have CRUD in the main view as well. Still, there are many subtle differences */
 class PostDetails extends React.Component {
 
     render() {
@@ -32,7 +32,7 @@ class PostDetails extends React.Component {
                 <div className="post-body">
                     {post.body}
                 </div>
-                <PostSubtitle post={post} categoryName={categoryName} />
+                <Subtitle item={post} category={{path: post.category, name: categoryName}} />
                 <div className="post-comments">
                     <CommentAdd postId={post.id} />
                     {comments && comments.map(id => <Comment key={id} commentId={id} />)}

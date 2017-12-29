@@ -7,6 +7,7 @@ import {deleteComment, downVote, editComment, upVote} from '../../actions/commen
 import {addErrorFeedback, resetFeedback} from '../../actions/feedback-actions';
 import VoteControls from '../shared/VoteControls';
 import CrudControls from '../shared/CrudControls';
+import Subtitle from '../shared/Subtitle';
 
 class Comment extends React.Component {
     bodyInput;
@@ -60,6 +61,7 @@ class Comment extends React.Component {
                     : <span>{comment.body}</span>
                 }
             </div>
+            <Subtitle item={comment} />
         </div>;
     }
 }

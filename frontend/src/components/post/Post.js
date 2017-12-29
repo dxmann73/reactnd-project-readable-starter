@@ -8,7 +8,7 @@ import './Post.css';
 import {deletePost, downVote, upVote} from '../../actions/post-actions';
 import VoteControls from '../shared/VoteControls';
 import PostTitle from './subcomponents/PostTitle';
-import PostSubtitle from './subcomponents/PostSubtitle';
+import Subtitle from '../shared/Subtitle';
 import CrudControls from '../shared/CrudControls';
 
 class Post extends React.Component {
@@ -21,9 +21,11 @@ class Post extends React.Component {
                 <PostTitle post={post} />
                 <CrudControls deleteHandler={() => dispatchDeletePost(post.id)}
                               editHandler={() => dispatchRouteToEditPost(post.id)} />
-                <PostSubtitle post={post} categoryName={categoryName} />
+                <Subtitle item={post} category={{path: post.category, name: categoryName}} />
                 <div className="post-comments">
-                    <Link className="post-permalink" to={`/post-details/${post.id}`}>{post.commentCount} comments</Link>
+                    <Link className="post-permalink" to={`/post-details/${post.id}`}>
+                        {post.commentCount ? `see all ${post.commentCount} comments` : `be the first to add a comment`}
+                    </Link>
                 </div>
             </div>
         </div>;

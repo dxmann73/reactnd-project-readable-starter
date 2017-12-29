@@ -1,10 +1,10 @@
-.post-subtitle {
-    width: 60rem;
+.subtitle-wrapper {
+    width: 40rem;
     display: block;
     font-size: small;
 }
 
-.post-author {
+.subtitle-author {
     color: midnightblue;
     font-weight: bolder;
 }
