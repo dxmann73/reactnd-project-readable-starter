@@ -41,7 +41,7 @@ class PostEdit extends React.Component {
     render() {
         const {post, dispatchGoBack} = this.props;
         if (!post) {
-            return <h4>fetching post... TODO make deleted posts inaccessible</h4>;
+            return <h4>This post does not seem to exist.</h4>;
         }
         return <div className="category-add">
             <h4 className="category-add-heading">Edit post:</h4>

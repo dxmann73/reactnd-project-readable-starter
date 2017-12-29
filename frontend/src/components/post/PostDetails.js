@@ -24,7 +24,7 @@ class PostDetails extends React.Component {
     render() {
         const {post, comments, categoryName, dispatchUpVote, dispatchDownVote, dispatchRouteToEditPost} = this.props;
         if (!post) {
-            return <h4>fetching post... TODO make deleted posts inaccessible</h4>;
+            return <h4>This post does not seem to exist.</h4>;
         }
         return <div className="post-details-wrapper">
             <h4 className="post-details-heading">Post details with comments:</h4>
@@ -76,8 +76,8 @@ PostDetails.propTypes = {
 
 const mapStateToProps = (state, props) => {
     const post = state.posts[props.postId];
-    // the following is to make sure both categories and post have been fetched TODO categories should always be there when we come here
-    const categoryName = (post && state.categories.byPath && state.categories.byPath[post.category].name) || 'fetching...';
+    // make sure the post has been fetched
+    const categoryName = (post && state.categories.byPath[post.category].name) || 'fetching...';
     return {
         post,
         postId: props.postId,

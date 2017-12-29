@@ -42,11 +42,9 @@ Post.propTypes = {
 
 const mapStateToProps = (state, props) => {
     const post = state.posts[props.postId];
-    // the following is to make sure that categories have been fetched TODO categories should always be there when we come here
-    const categoryName = (state.categories.byPath && state.categories.byPath[post.category].name) || 'fetching...';
     return {
         post,
-        categoryName,
+        categoryName: state.categories.byPath[post.category].name || 'fetching...',
     };
 };
 

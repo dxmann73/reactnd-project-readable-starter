@@ -21,8 +21,9 @@ export const fetchPosts = (categoryPath) => (dispatch) => {
 };
 
 export const fetchPost = (postId) => (dispatch) => {
+    // deleted posts come back as empty objects
     PostsAPI.getPost(postId)
-        .then(data => dispatch(updatePost(data)))
+        .then(data => data.id ? dispatch(updatePost(data)) : () => {})
         .catch(noop);
 };
 
