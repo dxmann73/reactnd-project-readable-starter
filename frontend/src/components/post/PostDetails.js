@@ -11,6 +11,7 @@ import PostSubtitle from './subcomponents/PostSubtitle';
 import {fetchComments} from '../../actions/comment-actions';
 import Comment from '../comment/Comment';
 import CrudControls from '../shared/CrudControls';
+import CommentAdd from '../comment/CommentAdd';
 
 /** Possible to merge with Post.js, now that we have CRUD in the main view as well. */
 class PostDetails extends React.Component {
@@ -33,6 +34,7 @@ class PostDetails extends React.Component {
                 </div>
                 <PostSubtitle post={post} categoryName={categoryName} />
                 <div className="post-comments">
+                    <CommentAdd postId={post.id} />
                     {comments && comments.map(id => <Comment key={id} commentId={id} />)}
                 </div>
             </div>

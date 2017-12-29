@@ -1,5 +1,26 @@
 .comment-main {
     margin-top: 0.25rem;
     display: inline-block;
-    width: 95%;
+}
+
+.comment-add-heading {
+    margin: 0.3rem;
+}
+
+.comment-body {
+    display: inline-block;
+}
+
+.comment-body textarea {
+    display: block;
+    width: 45rem;
+}
+
+.comment-body input {
+    display: block;
+}
+
+.comment-body span {
+    display: block;
+    width: 45rem;
 }
