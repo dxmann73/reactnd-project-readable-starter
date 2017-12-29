@@ -1,4 +1,4 @@
-import {INIT_COMMENTS, INSERT_COMMENT, REMOVE_COMMENT, UPDATE_COMMENT} from '../actions/comment-actions';
+import {INIT_COMMENTS, INSERT_COMMENT, REMOVE_COMMENT, RESET_COMMENTS, UPDATE_COMMENT} from '../actions/comment-actions';
 
 // TODO this has a lot in common with the post-reducers, in fact it was copied from there.
 // Maybe extract a reducer factory for flat-id-based states with optional sorting
@@ -15,6 +15,8 @@ const commentReducers = (state = {}, action) => {
             }, {});
             initState.ids = comments.map(comment => comment.id);
             return initState;
+        case RESET_COMMENTS:// before new comments are fetched
+            return {};
         case UPDATE_COMMENT:// when a single comment has been fetched or updated
             return {
                 ...state,

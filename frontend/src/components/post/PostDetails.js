@@ -8,7 +8,7 @@ import {deletePost, downVote, fetchPost, upVote} from '../../actions/post-action
 import VoteControls from '../shared/VoteControls';
 import PostTitle from './subcomponents/PostTitle';
 import Subtitle from '../shared/Subtitle';
-import {fetchComments} from '../../actions/comment-actions';
+import {fetchComments, resetComments} from '../../actions/comment-actions';
 import Comment from '../comment/Comment';
 import CrudControls from '../shared/CrudControls';
 import CommentAdd from '../comment/CommentAdd';
@@ -49,8 +49,13 @@ class PostDetails extends React.Component {
         if (!this.props.post) {
             // support F5 and bookmarked post URLs
             this.props.dispatchFetchPost(this.props.postId);
-            this.props.dispatchFetchComments(this.props.postId);
         }
+        this.props.dispatchFetchComments(this.props.postId);
+
+    }
+
+    componentWillUnmount() {
+        this.props.dispatchResetComments();// clean up state, or comments will live until the next post is shown
     }
 }
 
@@ -63,6 +68,7 @@ PostDetails.propTypes = {
     dispatchDownVote: PropTypes.func.isRequired,
     dispatchFetchPost: PropTypes.func.isRequired,
     dispatchFetchComments: PropTypes.func.isRequired,
+    dispatchResetComments: PropTypes.func.isRequired,
     dispatchRouteToEditPost: PropTypes.func.isRequired,
     dispatchRouteToCategoryView: PropTypes.func.isRequired,
     dispatchDeletePost: PropTypes.func.isRequired,
@@ -86,6 +92,7 @@ const mapDispatchToProps = (dispatch) => {
         dispatchDownVote: (postId) => dispatch(downVote(postId)),
         dispatchFetchPost: (postId) => dispatch(fetchPost(postId)),
         dispatchFetchComments: (postId) => dispatch(fetchComments(postId)),
+        dispatchResetComments: () => dispatch(resetComments()),
         dispatchRouteToEditPost: (postId) => dispatch(push(`/posts/edit/${postId}`)),
         dispatchRouteToCategoryView: (post) => dispatch(push(`/${post.category}`)),
         dispatchDeletePost: (postId) => dispatch(deletePost(postId)),

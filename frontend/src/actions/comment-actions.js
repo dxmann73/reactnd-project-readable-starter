@@ -2,6 +2,7 @@ import {noop} from '../actions/feedback-actions';
 import * as CommentsAPI from '../api/CommentsAPI';
 
 export const INIT_COMMENTS = 'INIT_COMMENTS';
+export const RESET_COMMENTS = 'RESET_COMMENTS';
 export const INSERT_COMMENT = 'INSERT_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
@@ -50,6 +51,13 @@ export const deleteComment = (id) => (dispatch) => {
 };
 
 /** Synchronous actions */
+/** Will reset all comments in the store. Needs to be fired before new comments are fetched, to avoid showing the old ones. */
+export const resetComments = () => {
+    return {
+        type: RESET_COMMENTS,
+    };
+};
+
 /** Will replace all comments in the store. Fired when comments have been returned from the API call.*/
 export const initComments = (comments) => {
     return {
