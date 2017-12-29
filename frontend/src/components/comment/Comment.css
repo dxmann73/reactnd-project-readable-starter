@@ -1,6 +1,13 @@
 .comment-main {
     margin-top: 0.25rem;
+    padding: 0.25rem;
     display: inline-block;
+}
+
+.comment-panel {
+    background-color: cadetblue;
+    padding: 0.5rem;
+    border-radius: 3px;
 }
 
 .comment-add-heading {
@@ -22,5 +29,6 @@
 
 .comment-body span {
     display: block;
+    margin-top: 0.25rem;
     width: 45rem;
 }

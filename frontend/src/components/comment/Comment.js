@@ -46,7 +46,7 @@ class Comment extends React.Component {
     render() {
         // console.log('Comment::render', this.props);
         const {comment, dispatchUpVote, dispatchDownVote, dispatchDeleteComment} = this.props;
-        return <div className="comment-main">
+        return <div className="comment-main comment-panel">
             <VoteControls upVoteHandler={() => dispatchUpVote(comment.id)} downVoteHandler={() => dispatchDownVote(comment.id)} />
             <CrudControls
                 deleteHandler={() => dispatchDeleteComment(comment.id)}
