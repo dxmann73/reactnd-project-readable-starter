@@ -1,13 +1,13 @@
 import {INIT_COMMENTS, INSERT_COMMENT, REMOVE_COMMENT, RESET_COMMENTS, UPDATE_COMMENT} from '../actions/comment-actions';
 
 // TODO this has a lot in common with the post-reducers, in fact it was copied from there.
-// Maybe extract a reducer factory for flat-id-based states with optional sorting
+// Maybe extract a reducer factory for flat-id-based sub-states, with sorting option
 const commentReducers = (state = {}, action) => {
     switch (action.type) {
         case INIT_COMMENTS:// when comments have been fetched
             const comments = action.comments
                 .filter(comment => !comment.deleted)// disregard deleted comments
-                .sort((a, b) => b.timestamp - a.timestamp);// newest first
+                .sort((a, b) => a.voteScore > b.voteScore ? -1 : b.voteScore > a.voteScore ? 1 : 0);
             // flatten all comments into the state with their ID as a key, so we can update them directly later on
             const initState = comments.reduce((state, comment) => {
                 state[comment.id] = comment;
